@@ -709,77 +709,48 @@ INSERT INTO Contener(IdMedicamento,IdInsumo,CantidadRequerida) VALUES (5,7,41703
 INSERT INTO Contener(IdMedicamento,IdInsumo,CantidadRequerida) VALUES (2,8,162072.5);
 INSERT INTO Contener(IdMedicamento,IdInsumo,CantidadRequerida) VALUES (2,1,169467.1682);
 
--- 50 resgistros de la tabla Ticket
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2030-05-27','0:31','Web',3,8);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2028-02-01','15:21','Web',3,2);
+------------------------------------------REGISTROS NECESARIOS PARA CONSULTA xi---------------------------------------------------------------------------------------
+-- 10 registros de la tabla Ticket
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2030-05-27','0:31','Web',1,8);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2028-02-01','15:21','Web',2,2);
 INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2024-02-19','2:05','Web',3,5);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2024-03-09','12:17','Web',3,1);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2029-09-06','14:57','Web',3,10);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2024-03-09','12:17','Web',4,3);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2029-09-06','14:57','Web',9,10);
 INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2030-01-28','6:22','Presencial',27,9);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2027-03-28','22:02','Web',127,1);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2021-02-26','10:50','Web',9,1);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2028-04-18','5:03','Web',135,3);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2021-04-15','7:09','Presencial',113,1);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2026-05-22','16:37','Web',48,7);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2026-05-02','11:13','Presencial',27,4);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2023-04-26','11:45','Presencial',67,6);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2023-04-21','0:02','Web',115,7);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2029-01-01','15:36','Web',62,6);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2024-05-26','8:33','Presencial',113,6);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2029-10-04','22:53','Presencial',87,9);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2021-12-07','10:18','Presencial',68,2);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2026-08-25','21:43','Web',119,5);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2025-09-19','10:15','Web',87,3);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2024-07-28','15:37','Presencial',133,4);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2025-05-22','22:01','Web',106,6);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2028-06-01','3:22','Presencial',116,9);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2026-12-19','12:03','Presencial',25,10);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2025-01-15','18:12','Web',31,5);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2030-06-13','23:20','Web',70,9);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2025-05-29','21:59','Presencial',103,1);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2029-12-15','1:36','Web',140,8);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2029-06-23','17:53','Presencial',122,4);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2027-06-06','6:09','Presencial',113,3);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2030-11-03','4:57','Presencial',39,3);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2027-10-17','23:37','Presencial',23,1);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2021-10-04','9:35','Presencial',94,2);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2022-06-12','18:23','Web',10,4);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2025-03-16','18:30','Presencial',97,7);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2030-03-02','9:21','Presencial',2,10);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2027-05-09','2:02','Web',88,4);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2027-04-26','23:04','Web',104,8);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2029-08-08','1:08','Presencial',145,10);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2029-02-06','6:57','Presencial',121,8);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2023-07-20','6:58','Presencial',54,7);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2026-01-01','0:17','Presencial',108,2);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2023-10-15','5:27','Web',92,10);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2028-09-01','3:30','Presencial',24,1);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2029-12-21','15:15','Web',3,7);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2024-07-26','16:58','Presencial',68,9);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2022-09-24','4:14','Web',9,8);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2026-07-24','9:13','Web',56,8);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2025-08-31','13:48','Web',21,2);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2026-08-09','10:10','Presencial',141,9);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2027-03-28','22:02','Web',127,10);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2021-02-26','10:50','Web',8,1);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2028-04-18','5:03','Web',10,3);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2021-04-15','7:09','Presencial',113,4);
 
--- 20 registros de la tabla Cajero
-INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('ZCMF480815X16','Harland','Percy','Tathacott','Allende',45,93,'Santa Cruz','Hidalgo','Jueves','23:05','07:05',16072913.7,78,'10/22/1996');
-INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('QFLO151002X44','Ervin','Hartzog','Thies','Guerrero',54,92,'La Primavera','Nayarit','Sabado','17:47','01:47',64449760.89,14,'2/9/2007');
-INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('IELH321123WX8','Zarla','Deans','Dilger','Callejón de los Sapos',63,9,'Valle Verde','Jalisco','Sabado','3:22','11:22',69601342.08,22,'3/22/2006');
-INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('VLIV231212D92','Malia','Shearsby','Ughelli','Pino Suárez',24,29,'San José','Baja California','Martes','2:28','10:28',96429949.95,51,'4/21/1992');
-INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('GBMC620917LW6','Nev','Nardrup','Yurivtsev','Callejón del Beso',3,86,'El Rosario','Veracruz','Martes','7:05','15:05',15017070.96,46,'6/10/2002');
-INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('XFGM270612P85','Nancee','Du Fray','Simpkin','Revolución',100,21,'El Rosario','Nayarit','Martes','12:21','20:21',25801927.49,65,'1/2/2000');
-INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('DVCI3911141X7','Alica','Dimmick','Bartolacci','Gutiérrez',27,89,'La Esperanza','Sinaloa','Martes','11:48','19:48',26264599.8,52,'2/24/2001');
-INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('NJPT621109Q85','Fredek','Cicchetto','Millen','Benito Juárez',52,63,'La Aurora','Oaxaca','Martes','17:37','01:37',88958368.52,19,'5/12/1994');
-INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('EKOF681206UJ0','Gerty','Grose','Choupin','Pino Suárez',95,65,'Santa Cruz','Durango','Martes','2:39','10:39',48180830.74,113,'3/23/2010');
-INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('FQNV611126PY9','Charmain','Cooke','O''Nion','Hidalgo',93,9,'San Miguel','Sinaloa','Domingo','19:27','03:27',35446442.35,45,'8/2/2008');
-INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('TTML9912270I5','Gwenni','Huddart','Gleadhall','Zaragoza',98,89,'San Pedro','Sinaloa','Jueves','15:54','23:54',39645915.58,7,'9/25/1999');
-INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('QUJU300804CO5','Niki','Leyband','Allan','Zaragoza',30,13,'La Aurora','Campeche','Lunes','23:34','07:34',70991766.28,36,'3/25/2007');
-INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('SRII3601023A4','Alfons','Thickins','Cogman','Independencia',82,29,'La Joya','Querétaro','Lunes','22:51','06:51',6750841.41,24,'5/26/1996');
-INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('ZCDC370321L10','Ana','Eagell','Garriock','Obregón',83,79,'La Aurora','Campeche','Jueves','3:18','11:18',60927225.37,5,'4/21/1995');
-INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('EXWB050827798','Woodman','Flores','Lithgow','Carranza',37,70,'Las Palmas','Querétaro','Lunes','23:06','07:06',36441844.9,111,'1/9/1999');
-INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('WTNP350422K71','Sherilyn','Sitlington','Vecard','Callejón de la Condesa',42,40,'Santa Cruz','Tamaulipas','Jueves','0:46','08:46',79730125.55,67,'7/22/1998');
-INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('MADX950922189','Batsheva','Callaway','Andrini','Morelos',10,39,'San Pedro','Oaxaca','Sabado','15:46','23:46',35673809.82,107,'7/30/1993');
-INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('MVSW980202U34','Loralee','Brunke','Seppey','López Mateos',51,33,'San José','Oaxaca','Jueves','9:30','17:30',87383515.78,18,'6/18/1994');
-INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('PQPX741202941','Phaedra','Gatecliffe','Haffenden','Revolución',54,34,'Villa de las Flores','Veracruz','Sabado','17:29','01:29',17461385.93,65,'6/29/2007');
-INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('TORA761101254','Teri','Aickin','Clint','Zaragoza',50,19,'Santa Cruz','Oaxaca','Jueves','12:12','20:12',56189444.76,38,'9/12/2004');
+-- 5 registros de la tabla Cajero
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('ZCMF480815X16','Harland','Percy','Tathacott','Allende',45,93,'Santa Cruz','Hidalgo','Jueves','23:05','07:05',16072913.7,1,'10/22/1996');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('QFLO151002X44','Ervin','Hartzog','Thies','Guerrero',54,92,'La Primavera','Nayarit','Sabado','17:47','01:47',64449760.89,2,'2/9/2007');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('IELH321123WX8','Zarla','Deans','Dilger','Callejón de los Sapos',63,9,'Valle Verde','Jalisco','Sabado','3:22','11:22',69601342.08,3,'3/22/2006');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('VLIV231212D92','Malia','Shearsby','Ughelli','Pino Suárez',24,29,'San José','Baja California','Martes','2:28','10:28',96429949.95,4,'4/21/1992');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('GBMC620917LW6','Nev','Nardrup','Yurivtsev','Callejón del Beso',3,86,'El Rosario','Veracruz','Martes','7:05','15:05',15017070.96,8,'6/10/2002');
 
+-- 12 registros de la tabla TenerMedComercial
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (1,2,6,10.53);
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (1,5,6,30.09);
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (1,8,3,64.89);
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (1,6,4,50.77);
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (2,7,3,9.79);
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (2,3,6,58.16);
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (2,2,3,12.79);
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (2,4,6,8.16);
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (8,9,4,8.51);
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (8,8,4,91.3);
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (8,1,3,12.98);
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (8,5,4,71.32);
+
+-- 8 registros de la tabla TenerMedPreparado
+INSERT INTO TenerMedPreparado(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (3,5,5,14.56);
+INSERT INTO TenerMedPreparado(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (3,2,4,27.9);
+INSERT INTO TenerMedPreparado(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (3,1,5,15.89);
+INSERT INTO TenerMedPreparado(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (3,3,5,27.81);
+INSERT INTO TenerMedPreparado(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (4,7,6,25.76);
+INSERT INTO TenerMedPreparado(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (4,9,5,29.87);
+INSERT INTO TenerMedPreparado(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (4,8,3,54.03);
+INSERT INTO TenerMedPreparado(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (4,6,4,2.81);
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
