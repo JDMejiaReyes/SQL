@@ -709,11 +709,12 @@ INSERT INTO Contener(IdMedicamento,IdInsumo,CantidadRequerida) VALUES (5,7,41703
 INSERT INTO Contener(IdMedicamento,IdInsumo,CantidadRequerida) VALUES (2,8,162072.5);
 INSERT INTO Contener(IdMedicamento,IdInsumo,CantidadRequerida) VALUES (2,1,169467.1682);
 
+-- 50 resgistros de la tabla Ticket
 INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2030-05-27','0:31','Web',3,8);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2028-02-01','15:21','Web',142,2);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2024-02-19','2:05','Web',76,5);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2024-03-09','12:17','Web',87,1);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2029-09-06','14:57','Web',148,10);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2028-02-01','15:21','Web',3,2);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2024-02-19','2:05','Web',3,5);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2024-03-09','12:17','Web',3,1);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2029-09-06','14:57','Web',3,10);
 INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2030-01-28','6:22','Presencial',27,9);
 INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2027-03-28','22:02','Web',127,1);
 INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2021-02-26','10:50','Web',9,1);
@@ -760,4 +761,25 @@ INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2
 INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2025-08-31','13:48','Web',21,2);
 INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2026-08-09','10:10','Presencial',141,9);
 
+-- 20 registros de la tabla Cajero
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('ZCMF480815X16','Harland','Percy','Tathacott','Allende',45,93,'Santa Cruz','Hidalgo','Jueves','23:05','07:05',16072913.7,78,'10/22/1996');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('QFLO151002X44','Ervin','Hartzog','Thies','Guerrero',54,92,'La Primavera','Nayarit','Sabado','17:47','01:47',64449760.89,14,'2/9/2007');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('IELH321123WX8','Zarla','Deans','Dilger','Callejón de los Sapos',63,9,'Valle Verde','Jalisco','Sabado','3:22','11:22',69601342.08,22,'3/22/2006');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('VLIV231212D92','Malia','Shearsby','Ughelli','Pino Suárez',24,29,'San José','Baja California','Martes','2:28','10:28',96429949.95,51,'4/21/1992');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('GBMC620917LW6','Nev','Nardrup','Yurivtsev','Callejón del Beso',3,86,'El Rosario','Veracruz','Martes','7:05','15:05',15017070.96,46,'6/10/2002');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('XFGM270612P85','Nancee','Du Fray','Simpkin','Revolución',100,21,'El Rosario','Nayarit','Martes','12:21','20:21',25801927.49,65,'1/2/2000');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('DVCI3911141X7','Alica','Dimmick','Bartolacci','Gutiérrez',27,89,'La Esperanza','Sinaloa','Martes','11:48','19:48',26264599.8,52,'2/24/2001');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('NJPT621109Q85','Fredek','Cicchetto','Millen','Benito Juárez',52,63,'La Aurora','Oaxaca','Martes','17:37','01:37',88958368.52,19,'5/12/1994');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('EKOF681206UJ0','Gerty','Grose','Choupin','Pino Suárez',95,65,'Santa Cruz','Durango','Martes','2:39','10:39',48180830.74,113,'3/23/2010');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('FQNV611126PY9','Charmain','Cooke','O''Nion','Hidalgo',93,9,'San Miguel','Sinaloa','Domingo','19:27','03:27',35446442.35,45,'8/2/2008');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('TTML9912270I5','Gwenni','Huddart','Gleadhall','Zaragoza',98,89,'San Pedro','Sinaloa','Jueves','15:54','23:54',39645915.58,7,'9/25/1999');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('QUJU300804CO5','Niki','Leyband','Allan','Zaragoza',30,13,'La Aurora','Campeche','Lunes','23:34','07:34',70991766.28,36,'3/25/2007');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('SRII3601023A4','Alfons','Thickins','Cogman','Independencia',82,29,'La Joya','Querétaro','Lunes','22:51','06:51',6750841.41,24,'5/26/1996');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('ZCDC370321L10','Ana','Eagell','Garriock','Obregón',83,79,'La Aurora','Campeche','Jueves','3:18','11:18',60927225.37,5,'4/21/1995');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('EXWB050827798','Woodman','Flores','Lithgow','Carranza',37,70,'Las Palmas','Querétaro','Lunes','23:06','07:06',36441844.9,111,'1/9/1999');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('WTNP350422K71','Sherilyn','Sitlington','Vecard','Callejón de la Condesa',42,40,'Santa Cruz','Tamaulipas','Jueves','0:46','08:46',79730125.55,67,'7/22/1998');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('MADX950922189','Batsheva','Callaway','Andrini','Morelos',10,39,'San Pedro','Oaxaca','Sabado','15:46','23:46',35673809.82,107,'7/30/1993');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('MVSW980202U34','Loralee','Brunke','Seppey','López Mateos',51,33,'San José','Oaxaca','Jueves','9:30','17:30',87383515.78,18,'6/18/1994');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('PQPX741202941','Phaedra','Gatecliffe','Haffenden','Revolución',54,34,'Villa de las Flores','Veracruz','Sabado','17:29','01:29',17461385.93,65,'6/29/2007');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('TORA761101254','Teri','Aickin','Clint','Zaragoza',50,19,'Santa Cruz','Oaxaca','Jueves','12:12','20:12',56189444.76,38,'9/12/2004');
 
