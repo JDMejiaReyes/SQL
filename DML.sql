@@ -709,3 +709,77 @@ INSERT INTO Contener(IdMedicamento,IdInsumo,CantidadRequerida) VALUES (5,7,41703
 INSERT INTO Contener(IdMedicamento,IdInsumo,CantidadRequerida) VALUES (2,8,162072.5);
 INSERT INTO Contener(IdMedicamento,IdInsumo,CantidadRequerida) VALUES (2,1,169467.1682);
 
+------------------------------------------REGISTROS NECESARIOS PARA CONSULTA xi---------------------------------------------------------------------------------------
+-- 10 registros de la tabla Ticket
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2030-05-27','0:31','Web',1,8);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2028-02-01','15:21','Web',2,2);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2024-02-19','2:05','Web',3,5);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2024-03-09','12:17','Web',4,3);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2029-09-06','14:57','Web',9,10);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2030-01-28','6:22','Presencial',27,9);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2027-03-28','22:02','Web',127,10);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2021-02-26','10:50','Web',8,1);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2028-04-18','5:03','Web',10,3);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2021-04-15','7:09','Presencial',113,4);
+
+-- 5 registros de la tabla Cajero
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('ZCMF480815X16','Harland','Percy','Tathacott','Allende',45,93,'Santa Cruz','Hidalgo','Jueves','23:05','07:05',16072913.7,1,'10/22/1996');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('QFLO151002X44','Ervin','Hartzog','Thies','Guerrero',54,92,'La Primavera','Nayarit','Sabado','17:47','01:47',64449760.89,2,'2/9/2007');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('IELH321123WX8','Zarla','Deans','Dilger','Callejón de los Sapos',63,9,'Valle Verde','Jalisco','Sabado','3:22','11:22',69601342.08,3,'3/22/2006');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('VLIV231212D92','Malia','Shearsby','Ughelli','Pino Suárez',24,29,'San José','Baja California','Martes','2:28','10:28',96429949.95,4,'4/21/1992');
+INSERT INTO Cajero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('GBMC620917LW6','Nev','Nardrup','Yurivtsev','Callejón del Beso',3,86,'El Rosario','Veracruz','Martes','7:05','15:05',15017070.96,8,'6/10/2002');
+
+-- 12 registros de la tabla TenerMedComercial
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (1,2,6,10.53);
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (1,5,6,30.09);
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (1,8,3,64.89);
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (1,6,4,50.77);
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (2,7,3,9.79);
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (2,3,6,58.16);
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (2,2,3,12.79);
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (2,4,6,8.16);
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (8,9,4,8.51);
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (8,8,4,91.3);
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (8,1,3,12.98);
+INSERT INTO TenerMedComercial(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (8,5,4,71.32);
+
+-- 8 registros de la tabla TenerMedPreparado
+INSERT INTO TenerMedPreparado(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (3,5,5,14.56);
+INSERT INTO TenerMedPreparado(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (3,2,4,27.9);
+INSERT INTO TenerMedPreparado(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (3,1,5,15.89);
+INSERT INTO TenerMedPreparado(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (3,3,5,27.81);
+INSERT INTO TenerMedPreparado(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (4,7,6,25.76);
+INSERT INTO TenerMedPreparado(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (4,9,5,29.87);
+INSERT INTO TenerMedPreparado(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (4,8,3,54.03);
+INSERT INTO TenerMedPreparado(FolioTicket,IdMedicamento,CantidadComprada,PrecioUnitario) VALUES (4,6,4,2.81);
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------REGISTROS NECESARIOS PARA CONSULTA xiii-------------------------------------------
+
+-- 5 registros de la tabla Aseador
+INSERT INTO Aseador(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('TSNC201028T99','Jordanna','Scampion','Moffatt','Hidalgo',71,77,'Las Palmas','Guanajuato','Sabado','6:23','14:23',30995153.85,89,'5/29/2002');
+INSERT INTO Aseador(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('PCUU811128GZ4','Olia','Byres','Hinrich','González',46,27,'La Esperanza','Oaxaca','Jueves','23:34','07:34',29429680.1,98,'11/1/2003');
+INSERT INTO Aseador(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('RXPY550701SK2','Dylan','Grenville','Heading','Callejón de la Condesa',27,21,'La Aurora','Durango','Domingo','16:42','00:42',80630863.45,13,'2/25/1997');
+INSERT INTO Aseador(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('WHCY581128I45','Corilla','Tabram','Baldi','Morelos',65,19,'Villa de las Flores','Tamaulipas','Jueves','9:41','17:41',53479395.11,18,'6/25/2007');
+INSERT INTO Aseador(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('COYP0803172H6','Sabra','Kochlin','Whickman','Madero',63,35,'La Primavera','Durango','Sabado','10:26','18:26',92722363.05,33,'9/12/2009');
+
+-- 5 registros de la tabla Enfermero
+INSERT INTO Enfermero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,TipoProcedimientoCargo,CertificacionReanimacion,CedulaProfesional,FechaNacimiento) VALUES ('YAYP321010011','Ivory','Whales','Burdas','Carranza',97,10,'El Paraíso','Oaxaca','Sabado','23:12','07:12',52953377.49,118,'Realización de lavados','false',1000001,'6/29/1997');
+INSERT INTO Enfermero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,TipoProcedimientoCargo,CertificacionReanimacion,CedulaProfesional,FechaNacimiento) VALUES ('OTUC651112A40','Germaine','Tuff','Dymocke','Callejón de la Amargura',11,64,'Santa Cruz','Veracruz','Domingo','12:32','20:32',44788810.69,117,'Colocación de sondas','false',1000002,'10/1/1999');
+INSERT INTO Enfermero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,TipoProcedimientoCargo,CertificacionReanimacion,CedulaProfesional,FechaNacimiento) VALUES ('PEHT8302162Q0','Aldon','Folkes','Izkovitz','López Mateos',7,23,'Bosques de Chapultepec','Querétaro','Domingo','20:57','04:57',25637609.22,73,'Aplicación de vacunas','false',1000003,'8/16/1999');
+INSERT INTO Enfermero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,TipoProcedimientoCargo,CertificacionReanimacion,CedulaProfesional,FechaNacimiento) VALUES ('CTUZ2012237P6','Nefen','Grenshiels','Mault','González',40,72,'Santa Cruz','Veracruz','Miercoles','17:55','01:55',95403064.87,135,'Asistencia en cirugías','false',1000004,'2/8/2000');
+INSERT INTO Enfermero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,TipoProcedimientoCargo,CertificacionReanimacion,CedulaProfesional,FechaNacimiento) VALUES ('HQFV371112968','Osborne','Barczewski','Kennady','Pino Suárez',98,60,'El Rosario','Campeche','Domingo','21:41','05:41',77682691.89,119,'Curación de heridas','false',1000005,'12/11/1995');
+
+-- 5 registros de la tabla Cuidador
+INSERT INTO Cuidador(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('WITB031013388','Birdie','Calven','Schiefersten','Madero',33,53,'La Esperanza','Querétaro','Lunes','22:13','06:13',50046637.36,2,'8/16/2009');
+INSERT INTO Cuidador(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('WVQO170903IY6','Urbain','Gleed','Gennrich','Revolución',5,39,'San José','Baja California','Sabado','14:49','22:49',31307685.29,84,'2/22/2002');
+INSERT INTO Cuidador(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('IEED1305064O2','Megan','Ketley','MacIlurick','Benito Juárez',27,23,'El Paraíso','Durango','Sabado','0:59','08:59',23641220.91,90,'2/28/1994');
+INSERT INTO Cuidador(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('XNRT820911650','Hardy','Farfolomeev','Boow','Callejón de los Sapos',20,91,'Bosques de Chapultepec','Querétaro','Domingo','20:49','04:49',71586845.35,123,'6/1/1998');
+INSERT INTO Cuidador(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInterior,Colonia,Estado,Dia,Entrada,Salida,Salario,IdSucursal,FechaNacimiento) VALUES ('UYDS461118XR3','Reggie','Tallquist','Reavell','Hidalgo',90,80,'San José','Campeche','Martes','1:50','09:50',31494640.04,80,'9/12/2002');
+
+-- 5 registros de la tabla consulta
+INSERT INTO Consulta(Fecha,Hora,Diagnostico,Precio,IdCliente,RFCMedico,RFCEnfermero,FolioTicket) VALUES ('2025-11-10','11:06','Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.',7793726.89,1,'KSZL810216HB2','YAYP321010011',1);
+INSERT INTO Consulta(Fecha,Hora,Diagnostico,Precio,IdCliente,RFCMedico,RFCEnfermero,FolioTicket) VALUES ('2018-03-17','9:21','Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.',795982.28,2,'QOFX051101381','PEHT8302162Q0',2);
+INSERT INTO Consulta(Fecha,Hora,Diagnostico,Precio,IdCliente,RFCMedico,RFCEnfermero,FolioTicket) VALUES ('2025-08-12','15:49','Sed ante. Vivamus tortor. Duis mattis egestas metus.',794340.96,3,'QYVW9506061O4','HQFV371112968',3);
+INSERT INTO Consulta(Fecha,Hora,Diagnostico,Precio,IdCliente,RFCMedico,RFCEnfermero,FolioTicket) VALUES ('2023-05-30','2:40','Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.',8084325.61,4,'GZVK4401023P5','PEHT8302162Q0',4);
+INSERT INTO Consulta(Fecha,Hora,Diagnostico,Precio,IdCliente,RFCMedico,RFCEnfermero,FolioTicket) VALUES ('2012-11-26','5:45','In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.',8667830.21,5,'CGNT831015960','YAYP321010011',5);
