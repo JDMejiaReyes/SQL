@@ -108,6 +108,22 @@ GROUP BY
 ORDER BY 
     Total_Medicamentos_Global DESC;
 
+-- iv. Obtener la lista de los clientes que hayan comprado en alguna sucursal pero que no hayan recibido alguna consulta.
+SELECT DISTINCT 
+    c.IdCliente,
+    c.Nombre || ' ' || c.Paterno || ' ' || c.Materno AS Nombre_Cliente
+FROM 
+    Cliente c
+INNER JOIN 
+    Ticket t ON c.IdCliente = t.IdCliente
+WHERE 
+    c.IdCliente NOT IN (
+        SELECT IdCliente 
+        FROM Consulta
+    )
+ORDER BY 
+    c.IdCliente ASC;
+
 -- xi. Listar a los vendedores cuyo total de medicamentos vendidos (número de productos distintos que ofrecen) sea mayor a 3.
 
 SELECT 
