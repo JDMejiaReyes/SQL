@@ -56,6 +56,7 @@ FROM
 LEFT JOIN 
     ClienteOnline co ON c.IdCliente = co.IdCliente;
 
+
 -- ii. Calcular cuántos medicamentos ha comprado cada cliente.
 -- Para los medicamentos comerciales
 SELECT 
@@ -107,6 +108,7 @@ GROUP BY
     c.IdCliente, c.Nombre, c.Paterno, c.Materno
 ORDER BY 
     Total_Medicamentos_Global DESC;
+
 
 -- iv. Obtener la lista de los clientes que hayan comprado en alguna sucursal pero que no hayan recibido alguna consulta.
 SELECT DISTINCT 
@@ -161,8 +163,36 @@ GROUP BY
 ORDER BY 
     t.FolioTicket ASC;
 
--- xi. Listar a los vendedores cuyo total de medicamentos vendidos (número de productos distintos que ofrecen) sea mayor a 3.
 
+-- ix. Mostrar a todos los proveedores junto con los productos que proveen, indicando el precio unitario por producto.
+SELECT 
+    e.IdProveedor, 
+    m.NombreComercial AS producto, 
+    e.PrecioUnitario,
+    'Medicamento' AS tipo_producto
+FROM EntregarMedComercial e
+JOIN MedComercial m ON e.IdMedicamento = m.IdMedicamento
+
+UNION
+
+SELECT 
+    ei.IdProveedor, 
+    i.NombreComercial AS producto, 
+    ei.PrecioUnitario,
+    'Insumo' AS tipo_producto
+FROM EntregarInsumo ei
+JOIN Insumo i ON ei.IdInsumo = i.IdInsumo;
+
+
+-- x. Mostrar las sucursales que posean al menos 5 médicos.
+SELECT s.IdSucursal, count(m.RFC) AS total_medicos
+FROM Sucursal s  
+JOIN Medico m ON s.IdSucursal = m.IdSucursal 
+GROUP BY s.IdSucursal
+HAVING count(m.RFC) >= 5;
+
+
+-- xi. Listar a los vendedores cuyo total de medicamentos vendidos (número de productos distintos que ofrecen) sea mayor a 3.
 SELECT 
     caj.RFC,
     caj.Nombre || ' ' || caj.Paterno || ' ' || caj.Materno AS NombreCompleto,
@@ -176,8 +206,27 @@ GROUP BY caj.RFC, caj.Nombre, caj.Paterno, caj.Materno
 HAVING COUNT(DISTINCT tmcm.IdMedicamento) + COUNT(DISTINCT tmp.IdMedicamento) > 3
 ORDER BY TotalProductosDistintos DESC;
 
--- xiii. Obtener las ganancias y perdidas totales (la perdida se calcula con la cantidad de productos que se le suministra el proveedor) por cada sucursal.
 
+-- xii. Listar a los proveedores, cuyo total de productos que proveen (numero de productos distintos que proveen) sea mayor a 3.
+SELECT 
+    resumen.IdProveedor, 
+    COUNT(DISTINCT resumen.id_articulo) AS total_productos
+FROM (
+    -- Primero juntamos los IDs de lo que hay en EntregarMedComercial
+    SELECT IdProveedor, IdMedicamento AS id_articulo 
+    FROM EntregarMedComercial
+    
+    UNION ALL
+    
+    -- Luego lo juntamos con los IDs de EntregarInsumo
+    SELECT IdProveedor, IdInsumo AS id_articulo 
+    FROM EntregarInsumo
+) AS resumen -- "resumen" es solo un apodo temporal para esta unión, no una tabla del DDL
+GROUP BY resumen.IdProveedor
+HAVING COUNT(DISTINCT resumen.id_articulo) > 3;
+
+
+-- xiii. Obtener las ganancias y perdidas totales (la perdida se calcula con la cantidad de productos que se le suministra el proveedor) por cada sucursal.
 WITH VentasPorSucursal AS (
     SELECT 
         t.IdSucursal,
