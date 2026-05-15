@@ -48,8 +48,9 @@ SELECT * FROM Proveedor;
 
 -- iii. Listar todas las enfermeras cuyo apellido materno termine en Ílo.
 
-SELECT * FROM Cliente 
-WHERE Nombre LIKE 'R%';
+
+SELECT * FROM Enfermero
+WHERE Materno LIKE '%Ílo%';
 
 -- xi.Listar a los vendedores cuyo total de medicamentos vendidos (número de productos distintos que ofrecen) sea mayor a 3.
 
