@@ -56,6 +56,58 @@ FROM
 LEFT JOIN 
     ClienteOnline co ON c.IdCliente = co.IdCliente;
 
+-- ii. Calcular cuántos medicamentos ha comprado cada cliente.
+-- Para los medicamentos comerciales
+SELECT 
+    c.Nombre || ' ' || c.Paterno || ' ' || c.Materno AS Nombre_Cliente,
+    COALESCE(SUM(tmc.CantidadComprada), 0) AS Total_Medicamentos_Comprados
+FROM 
+    Cliente c
+LEFT JOIN 
+    Ticket t ON c.IdCliente = t.IdCliente
+LEFT JOIN 
+    TenerMedComercial tmc ON t.FolioTicket = tmc.FolioTicket
+GROUP BY 
+    c.IdCliente, c.Nombre, c.Paterno, c.Materno
+ORDER BY 
+    Total_Medicamentos_Comprados DESC;
+
+-- Para los medicamentos preparados
+SELECT 
+    c.Nombre || ' ' || c.Paterno || ' ' || c.Materno AS Nombre_Cliente,
+    COALESCE(SUM(tmc.CantidadComprada), 0) AS Total_Medicamentos_Comprados
+FROM 
+    Cliente c
+LEFT JOIN 
+    Ticket t ON c.IdCliente = t.IdCliente
+LEFT JOIN 
+    TenerMedPreparado tmc ON t.FolioTicket = tmc.FolioTicket
+GROUP BY 
+    c.IdCliente, c.Nombre, c.Paterno, c.Materno
+ORDER BY 
+    Total_Medicamentos_Comprados DESC;
+
+-- Para ambos medicamentos 
+WITH DetalleTotal AS (
+    -- Unificamos ambos tipos de medicamentos en una sola lista virtual
+    SELECT FolioTicket, CantidadComprada FROM TenerMedComercial
+    UNION ALL
+    SELECT FolioTicket, CantidadComprada FROM TenerMedPreparado
+)
+SELECT 
+    c.Nombre || ' ' || c.Paterno || ' ' || c.Materno AS Nombre_Cliente,
+    COALESCE(SUM(dt.CantidadComprada), 0) AS Total_Medicamentos_Global
+FROM 
+    Cliente c
+LEFT JOIN 
+    Ticket t ON c.IdCliente = t.IdCliente
+LEFT JOIN 
+    DetalleTotal dt ON t.FolioTicket = dt.FolioTicket
+GROUP BY 
+    c.IdCliente, c.Nombre, c.Paterno, c.Materno
+ORDER BY 
+    Total_Medicamentos_Global DESC;
+
 -- xi.Listar a los vendedores cuyo total de medicamentos vendidos (número de productos distintos que ofrecen) sea mayor a 3.
 
 SELECT 
