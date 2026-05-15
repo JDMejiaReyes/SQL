@@ -1822,7 +1822,7 @@ CREATE TABLE ClienteOnline(
     IdCliente INTEGER,
     NombreUsuario VARCHAR(20),
     Contraseña VARCHAR(255),
-    NumeroTarjeta VARCHAR(16),
+    NumeroTarjeta VARCHAR(20),
     FechaVencimiento VARCHAR(5)
 );
 
