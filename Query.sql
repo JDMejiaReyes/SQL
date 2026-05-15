@@ -124,6 +124,43 @@ WHERE
 ORDER BY 
     c.IdCliente ASC;
 
+-- v. Calcular el precio bruto por ticket.
+WITH DesgloseCostos AS (
+    -- 1. Subtotal de medicamentos comerciales
+    SELECT 
+        FolioTicket, 
+        (CantidadComprada * PrecioUnitario) AS CostoItem
+    FROM TenerMedComercial
+    
+    UNION ALL
+    
+    -- 2. Subtotal de medicamentos preparados
+    SELECT 
+        FolioTicket, 
+        (CantidadComprada * PrecioUnitario) AS CostoItem
+    FROM TenerMedPreparado
+    
+    UNION ALL
+    
+    -- 3. Costo de la consulta médica (si la hubo)
+    SELECT 
+        FolioTicket, 
+        Precio AS CostoItem
+    FROM Consulta
+)
+SELECT 
+    t.FolioTicket,
+    t.FechaPago,
+    COALESCE(SUM(dc.CostoItem), 0) AS Precio_Bruto
+FROM 
+    Ticket t
+LEFT JOIN 
+    DesgloseCostos dc ON t.FolioTicket = dc.FolioTicket
+GROUP BY 
+    t.FolioTicket, t.FechaPago
+ORDER BY 
+    t.FolioTicket ASC;
+
 -- xi. Listar a los vendedores cuyo total de medicamentos vendidos (número de productos distintos que ofrecen) sea mayor a 3.
 
 SELECT 
