@@ -2415,6 +2415,7 @@ COMMENT ON COLUMN PrescribirMedPreparado.Duracion IS 'Duración total del tratam
 -- Comentarios de Restricciones
 COMMENT ON CONSTRAINT PrescribirMedPreparado_fk1 ON PrescribirMedPreparado IS 'Llave foránea (compuesta): Receta que incluye la prescripción.';
 COMMENT ON CONSTRAINT PrescribirMedPreparado_fk2 ON PrescribirMedPreparado IS 'Llave foránea: Medicamento preparado recetado.';
+<<<<<<< Updated upstream
 
 -- =================================================================
 --                    BLOQUE DE CORRECCIONES PARA P08 
@@ -2425,3 +2426,5 @@ ALTER TABLE PrescribirMedPreparado DROP CONSTRAINT PrescribirMedPreparado_fk2;
 ALTER TABLE PrescribirMedPreparado ADD CONSTRAINT PrescribirMedPreparado_fk2
 FOREIGN KEY (IdMedicamento) REFERENCES MedPreparado(IdMedicamento)
 ON UPDATE CASCADE ON DELETE RESTRICT;
+=======
+>>>>>>> Stashed changes
