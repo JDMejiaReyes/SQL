@@ -282,7 +282,6 @@ ORDER BY
     Gasto_Total_Acumulado DESC;
 
 -- viii. Listar a los enfermeros, que atendieron alguna consulta durante el 7 de mayo  del 2026 en un horario de 12:00 hrs. a 16:00 hrs.
-
 SELECT 
     e.RFC,
     e.Nombre,
@@ -292,7 +291,7 @@ FROM Enfermero e
 JOIN Consulta c 
     ON e.RFC = c.RFCEnfermero
 WHERE c.Fecha = '2026-05-07'
-  AND c.Hora BETWEEN '12:00:00' AND '16:00:00';
+    AND c.Hora BETWEEN '12:00:00' AND '16:00:00';
 
 
 -- ix. Mostrar a todos los proveedores junto con los productos que proveen, indicando el precio unitario por producto.
