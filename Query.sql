@@ -109,10 +109,10 @@ GROUP BY
 ORDER BY 
     Total_Medicamentos_Global DESC;
 
--- iii. Listar todos las enfermeras cuyo apellido materno contenga Ílo.
+-- iii. Listar todos las enfermeras cuyo apellido materno contenga llo.
 
 SELECT * FROM Enfermero 
-WHERE Materno LIKE '%Ílo%';
+WHERE Materno LIKE '%llo%';
 
 -- iv. Obtener la lista de los clientes que hayan comprado en alguna sucursal pero que no hayan recibido alguna consulta.
 SELECT DISTINCT 
@@ -166,6 +166,20 @@ GROUP BY
     t.FolioTicket, t.FechaPago
 ORDER BY 
     t.FolioTicket ASC;
+
+
+-- viii. Listar a los enfermeros, que atendieron alguna consulta durante el 7 de mayo  del 2026 en un horario de 12:00 hrs. a 16:00 hrs.
+
+SELECT 
+    e.RFC,
+    e.Nombre,
+    c.Fecha,
+    c.Hora
+FROM Enfermero e
+JOIN Consulta c 
+    ON e.RFC = c.RFCEnfermero
+WHERE c.Fecha = '2026-05-07'
+  AND c.Hora BETWEEN '12:00:00' AND '16:00:00';
 
 
 -- ix. Mostrar a todos los proveedores junto con los productos que proveen, indicando el precio unitario por producto.
@@ -301,17 +315,6 @@ LEFT JOIN CostosPorSucursal cs ON s.IdSucursal = cs.IdSucursal
 LEFT JOIN SalariosPorSucursal ss ON s.IdSucursal = ss.IdSucursal
 ORDER BY GananciaNeta DESC;
 
--- viii. Listar a los enfermeros, que atendieron alguna consulta durante el 7 de mayo  del 2026 en un horario de 12:00 hrs. a 16:00 hrs.
 
-SELECT 
-    e.RFC,
-    e.Nombre,
-    c.Fecha,
-    c.Hora
-FROM Enfermero e
-JOIN Consulta c 
-    ON e.RFC = c.RFCEnfermero
-WHERE c.Fecha = '2026-05-07'
-  AND c.Hora BETWEEN '12:00:00' AND '16:00:00';
 
 
