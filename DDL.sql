@@ -2119,7 +2119,7 @@ CREATE TABLE Consulta(
     Fecha DATE,
     Hora TIME,
     Diagnostico TEXT,
-    Precio NUMERIC(10,2),
+    Precio NUMERIC(4,2),
     IdCliente INTEGER,
     RFCMedico VARCHAR(13),
     RFCEnfermero VARCHAR(13),
