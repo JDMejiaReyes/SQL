@@ -1868,8 +1868,8 @@ CREATE TABLE Ticket(
     FechaPago DATE,
     HoraPago TIME,
     TipoVenta VARCHAR(20),
-    PrecioBruto NUMERIC(10,2),
-    PrecioNeto NUMERIC(10,2),
+    PrecioBruto NUMERIC(10,2) DEFAULT 0.00,
+    PrecioNeto NUMERIC(10,2) DEFAULT 0.00,
     IdSucursal INTEGER,
     IdCliente INTEGER,
     EsTicketConsulta BOOLEAN,
@@ -1909,14 +1909,6 @@ ALTER COLUMN IdSucursal SET NOT NULL,
 ALTER COLUMN EsTicketConsulta SET NOT NULL,
 ALTER COLUMN EsTicketMedicamento SET NOT NULL,
 ADD CONSTRAINT Ticket_chk_completitud CHECK (EsTicketConsulta = TRUE OR EsTicketMedicamento = TRUE);
-
--- =================================================================
---                      BLOQUE DE CORRECCIONES 
--- =================================================================
--- Se eliminan porque el precio bruto y el precio neto se deben calcular mediante consultas DQL
-ALTER TABLE Ticket 
-    DROP COLUMN PrecioBruto,
-    DROP COLUMN PrecioNeto;
 
 -- =================================================================
 --                      BLOQUE DE COMENTARIOS 
