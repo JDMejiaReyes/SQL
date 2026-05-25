@@ -1871,7 +1871,9 @@ CREATE TABLE Ticket(
     PrecioBruto NUMERIC(10,2),
     PrecioNeto NUMERIC(10,2),
     IdSucursal INTEGER,
-    IdCliente INTEGER
+    IdCliente INTEGER,
+    EsTicketConsulta BOOLEAN,
+    EsTicketMedicamento BOOLEAN
 );
 
 -- PK
@@ -1901,7 +1903,12 @@ ALTER COLUMN PrecioNeto SET NOT NULL,
 
 ADD CONSTRAINT Ticket_d3 CHECK (PrecioNeto >= 0),
 ALTER COLUMN IdCliente SET NOT NULL,
-ALTER COLUMN IdSucursal SET NOT NULL;
+ALTER COLUMN IdSucursal SET NOT NULL,
+
+-- NUEVAS RESTRICCIONES DE HERENCIA
+ALTER COLUMN EsTicketConsulta SET NOT NULL,
+ALTER COLUMN EsTicketMedicamento SET NOT NULL,
+ADD CONSTRAINT Ticket_chk_completitud CHECK (EsTicketConsulta = TRUE OR EsTicketMedicamento = TRUE);
 
 -- =================================================================
 --                      BLOQUE DE CORRECCIONES 
@@ -1923,12 +1930,15 @@ COMMENT ON COLUMN Ticket.HoraPago IS 'Hora en que se registró el pago.';
 COMMENT ON COLUMN Ticket.TipoVenta IS 'Canal de venta (Presencial o Web).';
 COMMENT ON COLUMN Ticket.IdSucursal IS 'Sucursal donde se generó el ticket.';
 COMMENT ON COLUMN Ticket.IdCliente IS 'Cliente que realizó la compra.';
+COMMENT ON COLUMN Ticket.EsTicketConsulta IS 'Bandera booleana (Herencia): Indica si el ticket cobra un servicio clínico.';
+COMMENT ON COLUMN Ticket.EsTicketMedicamento IS 'Bandera booleana (Herencia): Indica si el ticket incluye productos del catálogo.';
 
 -- Comentarios de Restricciones
 COMMENT ON CONSTRAINT Ticket_pk ON Ticket IS 'Llave primaria: Folio único del ticket.';
 COMMENT ON CONSTRAINT Ticket_fk1 ON Ticket IS 'Llave foránea: Sucursal donde se realizó la venta.';
 COMMENT ON CONSTRAINT Ticket_fk2 ON Ticket IS 'Llave foránea: Cliente que realizó la compra.';
 COMMENT ON CONSTRAINT Ticket_d1 ON Ticket IS 'Validación: Restringe el tipo de venta a Presencial o Web.';
+COMMENT ON CONSTRAINT Ticket_chk_completitud ON Ticket IS 'Integridad de completitud total: Un ticket no puede guardarse si ambas banderas son falsas.';
 
 
 -- Tabla 4
