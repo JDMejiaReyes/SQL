@@ -58,14 +58,14 @@ INSERT INTO Enfermero(RFC,Nombre,Paterno,Materno,Calle,NumeroExterior,NumeroInte
 --====================================================================================================
 --                                  8 registros para Ticket
 --====================================================================================================
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2023-06-22','16:19','Presencial',1,6);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2024-01-19','2:26','Presencial',4,10);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2027-11-19','0:47','Presencial',8,6);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2028-01-15','9:00','Web',10,1);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2029-03-26','22:50','Web',3,10);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2023-09-08','10:26','Presencial',1,3);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2023-07-29','11:02','Web',8,1);
-INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente) VALUES ('2030-09-25','10:34','Presencial',7,5);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente,EsTicketConsulta,EsTicketMedicamento) VALUES ('2023-06-22','16:19','Presencial',1,6,TRUE,TRUE);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente,EsTicketConsulta,EsTicketMedicamento) VALUES ('2024-01-19','2:26','Presencial',4,10,TRUE,TRUE);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente,EsTicketConsulta,EsTicketMedicamento) VALUES ('2027-11-19','0:47','Presencial',8,6,TRUE,TRUE);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente,EsTicketConsulta,EsTicketMedicamento) VALUES ('2028-01-15','9:00','Web',10,1,TRUE,TRUE);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente,EsTicketConsulta,EsTicketMedicamento) VALUES ('2029-03-26','22:50','Web',3,10,TRUE,TRUE);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente,EsTicketConsulta,EsTicketMedicamento) VALUES ('2023-09-08','10:26','Presencial',1,3,FALSE,TRUE);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente,EsTicketConsulta,EsTicketMedicamento) VALUES ('2023-07-29','11:02','Web',8,1,FALSE,TRUE);
+INSERT INTO Ticket(FechaPago,HoraPago,TipoVenta,IdSucursal,IdCliente,EsTicketConsulta,EsTicketMedicamento) VALUES ('2030-09-25','10:34','Presencial',7,5,FALSE,TRUE);
 
 --====================================================================================================
 --                                  5 registros para CobrarConsulta
