@@ -2114,7 +2114,7 @@ COMMENT ON CONSTRAINT TenerMedPreparado_d2 ON TenerMedPreparado IS 'Validación:
 -- =================================================================
 
 -- Tabla 1
-CREATE TABLE Consulta(
+CREATE TABLE CobrarConsulta(
     IdConsulta SERIAL,
     Fecha DATE,
     Hora TIME,
