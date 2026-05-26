@@ -1868,10 +1868,12 @@ CREATE TABLE Ticket(
     FechaPago DATE,
     HoraPago TIME,
     TipoVenta VARCHAR(20),
-    PrecioBruto NUMERIC(10,2),
-    PrecioNeto NUMERIC(10,2),
+    PrecioBruto NUMERIC(10,2) DEFAULT 0.00,
+    PrecioNeto NUMERIC(10,2) DEFAULT 0.00,
     IdSucursal INTEGER,
-    IdCliente INTEGER
+    IdCliente INTEGER,
+    EsTicketConsulta BOOLEAN,
+    EsTicketMedicamento BOOLEAN
 );
 
 -- PK
@@ -1901,15 +1903,12 @@ ALTER COLUMN PrecioNeto SET NOT NULL,
 
 ADD CONSTRAINT Ticket_d3 CHECK (PrecioNeto >= 0),
 ALTER COLUMN IdCliente SET NOT NULL,
-ALTER COLUMN IdSucursal SET NOT NULL;
+ALTER COLUMN IdSucursal SET NOT NULL,
 
--- =================================================================
---                      BLOQUE DE CORRECCIONES 
--- =================================================================
--- Se eliminan porque el precio bruto y el precio neto se deben calcular mediante consultas DQL
-ALTER TABLE Ticket 
-    DROP COLUMN PrecioBruto,
-    DROP COLUMN PrecioNeto;
+-- NUEVAS RESTRICCIONES DE HERENCIA
+ALTER COLUMN EsTicketConsulta SET NOT NULL,
+ALTER COLUMN EsTicketMedicamento SET NOT NULL,
+ADD CONSTRAINT Ticket_chk_completitud CHECK (EsTicketConsulta = TRUE OR EsTicketMedicamento = TRUE);
 
 -- =================================================================
 --                      BLOQUE DE COMENTARIOS 
@@ -1923,12 +1922,15 @@ COMMENT ON COLUMN Ticket.HoraPago IS 'Hora en que se registró el pago.';
 COMMENT ON COLUMN Ticket.TipoVenta IS 'Canal de venta (Presencial o Web).';
 COMMENT ON COLUMN Ticket.IdSucursal IS 'Sucursal donde se generó el ticket.';
 COMMENT ON COLUMN Ticket.IdCliente IS 'Cliente que realizó la compra.';
+COMMENT ON COLUMN Ticket.EsTicketConsulta IS 'Bandera booleana (Herencia): Indica si el ticket cobra un servicio clínico.';
+COMMENT ON COLUMN Ticket.EsTicketMedicamento IS 'Bandera booleana (Herencia): Indica si el ticket incluye productos del catálogo.';
 
 -- Comentarios de Restricciones
 COMMENT ON CONSTRAINT Ticket_pk ON Ticket IS 'Llave primaria: Folio único del ticket.';
 COMMENT ON CONSTRAINT Ticket_fk1 ON Ticket IS 'Llave foránea: Sucursal donde se realizó la venta.';
 COMMENT ON CONSTRAINT Ticket_fk2 ON Ticket IS 'Llave foránea: Cliente que realizó la compra.';
 COMMENT ON CONSTRAINT Ticket_d1 ON Ticket IS 'Validación: Restringe el tipo de venta a Presencial o Web.';
+COMMENT ON CONSTRAINT Ticket_chk_completitud ON Ticket IS 'Integridad de completitud total: Un ticket no puede guardarse si ambas banderas son falsas.';
 
 
 -- Tabla 4
@@ -2114,7 +2116,7 @@ COMMENT ON CONSTRAINT TenerMedPreparado_d2 ON TenerMedPreparado IS 'Validación:
 -- =================================================================
 
 -- Tabla 1
-CREATE TABLE Consulta(
+CREATE TABLE CobrarConsulta(
     IdConsulta SERIAL,
     Fecha DATE,
     Hora TIME,
@@ -2127,67 +2129,67 @@ CREATE TABLE Consulta(
 );
 
 -- PK
-ALTER TABLE Consulta ADD CONSTRAINT Consulta_pk
+ALTER TABLE CobrarConsulta ADD CONSTRAINT CobrarConsulta_pk
 PRIMARY KEY (IdConsulta);
 
 -- FK
-ALTER TABLE Consulta ADD CONSTRAINT Consulta_fk1
+ALTER TABLE CobrarConsulta ADD CONSTRAINT CobrarConsulta_fk1
 FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente)
 ON UPDATE CASCADE ON DELETE RESTRICT;
 
-ALTER TABLE Consulta ADD CONSTRAINT Consulta_fk2
+ALTER TABLE CobrarConsulta ADD CONSTRAINT CobrarConsulta_fk2
 FOREIGN KEY (RFCMedico) REFERENCES Medico(RFC)
 ON UPDATE CASCADE ON DELETE RESTRICT;
 
-ALTER TABLE Consulta ADD CONSTRAINT Consulta_fk3
+ALTER TABLE CobrarConsulta ADD CONSTRAINT CobrarConsulta_fk3
 FOREIGN KEY (RFCEnfermero) REFERENCES Enfermero(RFC)
 ON UPDATE CASCADE ON DELETE RESTRICT;
 
-ALTER TABLE Consulta ADD CONSTRAINT Consulta_fk4
+ALTER TABLE CobrarConsulta ADD CONSTRAINT CobrarConsulta_fk4
 FOREIGN KEY (FolioTicket) REFERENCES Ticket(FolioTicket)
 ON UPDATE CASCADE ON DELETE RESTRICT;
 
 -- Restricciones
-ALTER TABLE Consulta
+ALTER TABLE CobrarConsulta
 ALTER COLUMN Fecha SET NOT NULL,
 ALTER COLUMN Hora SET NOT NULL,
 ALTER COLUMN RFCMedico SET NOT NULL,
 ALTER COLUMN Precio SET NOT NULL,
 ALTER COLUMN Diagnostico SET NOT NULL,
-ADD CONSTRAINT Consulta_d1 CHECK (Precio >= 0),
+ADD CONSTRAINT CobrarConsulta_d1 CHECK (Precio >= 0),
 ALTER COLUMN FolioTicket SET NOT NULL,
-ADD CONSTRAINT Consulta_u2 UNIQUE (FolioTicket);
+ADD CONSTRAINT CobrarConsulta_u2 UNIQUE (FolioTicket);
 
 -- =================================================================
 --                      BLOQUE DE COMENTARIOS 
 -- =================================================================
-COMMENT ON TABLE Consulta IS 'Registro de consultas médicas realizadas en las clínicas.';
+COMMENT ON TABLE CobrarConsulta IS 'Registro de consultas médicas realizadas en las clínicas.';
 
 -- Comentarios de Columnas 
-COMMENT ON COLUMN Consulta.IdConsulta IS 'Identificador único de la consulta médica.';
-COMMENT ON COLUMN Consulta.Fecha IS 'Fecha en la que se realiza la consulta.';
-COMMENT ON COLUMN Consulta.Hora IS 'Hora programada o de inicio de la consulta.';
-COMMENT ON COLUMN Consulta.Diagnostico IS 'Descripción clínica detallada de los hallazgos en la consulta.';
-COMMENT ON COLUMN Consulta.Precio IS 'Costo total de los servicios médicos prestados en la consulta.';
-COMMENT ON COLUMN Consulta.IdCliente IS 'Identificador del paciente; es obligatorio para registrar la atención.';
-COMMENT ON COLUMN Consulta.RFCMedico IS 'RFC del médico responsable de atender la consulta.';
-COMMENT ON COLUMN Consulta.RFCEnfermero IS 'RFC del enfermero de apoyo; es opcional (permite NULL).';
-COMMENT ON COLUMN Consulta.FolioTicket IS 'Folio del ticket de pago vinculado a la transacción de la consulta.';
+COMMENT ON COLUMN CobrarConsulta.IdConsulta IS 'Identificador único de la consulta médica.';
+COMMENT ON COLUMN CobrarConsulta.Fecha IS 'Fecha en la que se realiza la consulta.';
+COMMENT ON COLUMN CobrarConsulta.Hora IS 'Hora programada o de inicio de la consulta.';
+COMMENT ON COLUMN CobrarConsulta.Diagnostico IS 'Descripción clínica detallada de los hallazgos en la consulta.';
+COMMENT ON COLUMN CobrarConsulta.Precio IS 'Costo total de los servicios médicos prestados en la consulta.';
+COMMENT ON COLUMN CobrarConsulta.IdCliente IS 'Identificador del paciente; es obligatorio para registrar la atención.';
+COMMENT ON COLUMN CobrarConsulta.RFCMedico IS 'RFC del médico responsable de atender la consulta.';
+COMMENT ON COLUMN CobrarConsulta.RFCEnfermero IS 'RFC del enfermero de apoyo; es opcional (permite NULL).';
+COMMENT ON COLUMN CobrarConsulta.FolioTicket IS 'Folio del ticket de pago vinculado a la transacción de la consulta.';
 
 -- Comentarios de Restricciones
-COMMENT ON CONSTRAINT Consulta_pk ON Consulta IS 'Llave primaria: Identificador único de la consulta.';
-COMMENT ON CONSTRAINT Consulta_fk1 ON Consulta IS 'Llave foránea: Cliente que recibe la consulta.';
-COMMENT ON CONSTRAINT Consulta_fk2 ON Consulta IS 'Llave foránea: Médico que atiende la consulta.';
-COMMENT ON CONSTRAINT Consulta_fk3 ON Consulta IS 'Llave foránea: Enfermero de apoyo en la consulta.';
-COMMENT ON CONSTRAINT Consulta_fk4 ON Consulta IS 'Llave foránea: Ticket de pago vinculado a la consulta.';
-COMMENT ON CONSTRAINT Consulta_d1 ON Consulta IS 'Validación: El precio de la consulta no puede ser negativo.';
-COMMENT ON CONSTRAINT Consulta_u2 ON Consulta IS 'Restricción: Unicidad del ticket por consulta (1:1).';
+COMMENT ON CONSTRAINT CobrarConsulta_pk ON CobrarConsulta IS 'Llave primaria: Identificador único de la consulta.';
+COMMENT ON CONSTRAINT CobrarConsulta_fk1 ON CobrarConsulta IS 'Llave foránea: Cliente que recibe la consulta.';
+COMMENT ON CONSTRAINT CobrarConsulta_fk2 ON CobrarConsulta IS 'Llave foránea: Médico que atiende la consulta.';
+COMMENT ON CONSTRAINT CobrarConsulta_fk3 ON CobrarConsulta IS 'Llave foránea: Enfermero de apoyo en la consulta.';
+COMMENT ON CONSTRAINT CobrarConsulta_fk4 ON CobrarConsulta IS 'Llave foránea: Ticket de pago vinculado a la consulta.';
+COMMENT ON CONSTRAINT CobrarConsulta_d1 ON CobrarConsulta IS 'Validación: El precio de la consulta no puede ser negativo.';
+COMMENT ON CONSTRAINT CobrarConsulta_u2 ON CobrarConsulta IS 'Restricción: Unicidad del ticket por consulta (1:1).';
 
 -- =================================================================
 --                    BLOQUE DE CORRECCIONES PARA P08 
 -- =================================================================
 -- Obligatoriedad del Cliente (Dominio)
-ALTER TABLE Consulta
+ALTER TABLE CobrarConsulta
 ALTER COLUMN IdCliente SET NOT NULL;
 -- Nota: RFCEnfermero se mantiene sin NOT NULL para permitir valores nulos 
 -- cuando no haya personal de enfermería asignado a la consulta.
@@ -2208,7 +2210,7 @@ PRIMARY KEY (IdConsulta, NumeroReceta);
 
 -- FK
 ALTER TABLE Receta ADD CONSTRAINT Receta_fk
-FOREIGN KEY (IdConsulta) REFERENCES Consulta(IdConsulta)
+FOREIGN KEY (IdConsulta) REFERENCES CobrarConsulta(IdConsulta)
 ON UPDATE CASCADE ON DELETE CASCADE;
 
 -- Restricciones
@@ -2241,7 +2243,7 @@ COMMENT ON COLUMN Receta.Turno IS 'Turno de atención (Matutino o Vespertino).';
 
 -- Comentarios de Restricciones
 COMMENT ON CONSTRAINT Receta_pk ON Receta IS 'Llave primaria compuesta (IdConsulta y NumeroReceta).';
-COMMENT ON CONSTRAINT Receta_fk ON Receta IS 'Llave foránea: Consulta médica que originó la receta.';
+COMMENT ON CONSTRAINT Receta_fk ON Receta IS 'Llave foránea: CobrarConsulta médica que originó la receta.';
 COMMENT ON CONSTRAINT Receta_d1 ON Receta IS 'Validación: El peso del paciente debe ser positivo.';
 COMMENT ON CONSTRAINT Receta_d2 ON Receta IS 'Validación: La talla del paciente debe ser positiva.';
 COMMENT ON CONSTRAINT Receta_d3 ON Receta IS 'Validación: El número de consultorio debe ser positivo.';
