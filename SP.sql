@@ -1,4 +1,4 @@
--- i. Un SP el cual se encarga de registrar un farmaceutico, en este SP, deber ́as introducir la informaci ́on del
+-- i. Un SP el cual se encarga de registrar un farmaceutico, en este SP, deberás introducir la información del
 -- farmaceutico y se debe de encargar de insertar en la tabla correspondiente, es importante que no permitan
 -- la insercion de numero o sımbolos cuando sean campos relacionados a nombres.
 CREATE OR REPLACE PROCEDURE registrar_farmaceutico(
