@@ -125,7 +125,7 @@ CREATE TABLE Medico (
     Dia VARCHAR(15),
     Entrada TIME,
     Salida TIME,
-    Salario NUMERIC(10, 2),
+    Salario NUMERIC(7, 2),
     IdSucursal INTEGER,
     InstitucionEgreso VARCHAR(100),
     VigenciaCertificacion DATE,
@@ -229,7 +229,7 @@ CREATE TABLE Enfermero (
     Dia VARCHAR(15),
     Entrada TIME,
     Salida TIME,
-    Salario NUMERIC(10, 2),
+    Salario NUMERIC(7, 2),
     IdSucursal INTEGER,
     TipoProcedimientoCargo VARCHAR(100),
     CertificacionReanimacion BOOLEAN,
@@ -332,7 +332,7 @@ CREATE TABLE Farmaceutico (
     Dia VARCHAR(15),
     Entrada TIME,
     Salida TIME,
-    Salario NUMERIC(10, 2),
+    Salario NUMERIC(7, 2),
     IdSucursal INTEGER,
     CedulaProfesional INTEGER
 );
@@ -430,7 +430,7 @@ CREATE TABLE Cajero (
     Dia VARCHAR(15),
     Entrada TIME,
     Salida TIME,
-    Salario NUMERIC(10, 2),
+    Salario NUMERIC(7, 2),
     IdSucursal INTEGER
 );
 
@@ -523,7 +523,7 @@ CREATE TABLE Aseador (
     Dia VARCHAR(15),
     Entrada TIME,
     Salida TIME,
-    Salario NUMERIC(10, 2),
+    Salario NUMERIC(7, 2),
     IdSucursal INTEGER
 );
 
@@ -616,7 +616,7 @@ CREATE TABLE Cuidador (
     Dia VARCHAR(15),
     Entrada TIME,
     Salida TIME,
-    Salario NUMERIC(10, 2),
+    Salario NUMERIC(7, 2),
     IdSucursal INTEGER
 );
 
@@ -1236,7 +1236,7 @@ COMMENT ON CONSTRAINT Horarios_Clinica_fk ON Horarios_Clinica IS 'Llave foránea
 -- Tabla 1
 CREATE TABLE MedComercial (
     IdMedicamento SERIAL,
-    NombreComercial VARCHAR(50),
+    NombreComercial VARCHAR(100),
     FormaFarmaceutica VARCHAR(20),
     Concentracion VARCHAR(20),
     Presentacion VARCHAR(50),
@@ -1505,12 +1505,12 @@ COMMENT ON CONSTRAINT Contener_d1 ON Contener IS 'Validación: La cantidad reque
 -- Tabla 1
 CREATE TABLE Proveedor (
     IdProveedor SERIAL,
-    RazonSocial VARCHAR(30),
+    RazonSocial VARCHAR(50),
     Calle VARCHAR(50), 
     NumeroExterior INTEGER, 
     NumeroInterior INTEGER,
     Colonia VARCHAR(50),
-    Estado VARCHAR(30)
+    Estado VARCHAR(50)
 );
 
 -- PK
@@ -1597,8 +1597,8 @@ CREATE TABLE EntregarMedComercial (
     FechaCaducidad DATE,
     CondicionesAlmacenamiento VARCHAR(100),
     CantidadRecibida INTEGER,
-    PrecioPublico NUMERIC(10, 2),
-    PrecioUnitario NUMERIC(10, 2)
+    PrecioPublico NUMERIC(6, 2),
+    PrecioUnitario NUMERIC(6, 2)
 );
 
 -- PK
@@ -1673,8 +1673,8 @@ CREATE TABLE EntregarInsumo (
     FechaCaducidad DATE,
     CondicionesAlmacenamiento VARCHAR(100),
     CantidadRecibida INTEGER,
-    PrecioPublico NUMERIC(10, 2),
-    PrecioUnitario NUMERIC(10, 2)
+    PrecioPublico NUMERIC(6, 2),
+    PrecioUnitario NUMERIC(6, 2)
 );
 
 -- PK
@@ -2006,7 +2006,7 @@ CREATE TABLE TenerMedComercial(
     FolioTicket INTEGER,
     IdMedicamento INTEGER,
     CantidadComprada INTEGER,
-    PrecioUnitario NUMERIC(10,2)
+    PrecioUnitario NUMERIC(6,2)
 );
 
 -- PK
@@ -2061,7 +2061,7 @@ CREATE TABLE TenerMedPreparado(
     FolioTicket INTEGER,
     IdMedicamento INTEGER,
     CantidadComprada INTEGER,
-    PrecioUnitario NUMERIC(10,2)
+    PrecioUnitario NUMERIC(6,2)
 );
 
 -- PK
