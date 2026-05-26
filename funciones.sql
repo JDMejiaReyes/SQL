@@ -21,3 +21,37 @@ BEGIN
     RETURN v_edad;
 END;
 $$ LANGUAGE plpgsql;
+
+
+-- ii. Una función que reciba la sucursal y calcule las ganancias que posee durante el año 2026.
+
+CREATE OR REPLACE FUNCTION GananciasSucursal2026(
+    p_IdSucursal INTEGER
+)
+RETURNS NUMERIC(12,2)
+AS $$
+DECLARE
+    total_consultas NUMERIC(12,2);
+    total_tickets NUMERIC(12,2);
+BEGIN
+
+    -- Ganancias de consultas
+    SELECT SUM(c.Precio)
+    INTO total_consultas
+    FROM CobrarConsulta c
+    JOIN Medico m ON c.RFCMedico = m.RFC
+    WHERE m.IdSucursal = p_IdSucursal
+      AND EXTRACT(YEAR FROM c.Fecha) = 2026;
+
+    -- Ganancias de tickets
+    SELECT SUM(t.PrecioNeto)
+    INTO total_tickets
+    FROM Ticket t
+    WHERE t.IdSucursal = p_IdSucursal
+      AND EXTRACT(YEAR FROM t.FechaPago) = 2026;
+
+    -- Suma final
+    RETURN total_consultas + total_tickets;
+
+END;
+$$ LANGUAGE plpgsql;
