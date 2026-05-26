@@ -14,21 +14,18 @@ FROM Cliente;
 -- ii. Probando la función que recibe el identificador de una sucursal y regresa las ganancias totales obtenidas durante el año 2026.
 SELECT GananciasSucursal2026(10);
 
--- Verificar las consultas cobradas asociadas a la sucursal 10 junto con el médico y el precio de cada consulta.
-SELECT c.Precio, c.RFCMedico, m.IdSucursal
+-- Suma el dinero de todas las consultas médicas hechas en 2026 por médicos de la sucursal 10.
+SELECT SUM(c.Precio)
 FROM CobrarConsulta c
-JOIN Medico m
-    ON c.RFCMedico = m.RFC
+JOIN Medico m ON c.RFCMedico = m.RFC
 WHERE m.IdSucursal = 10
   AND EXTRACT(YEAR FROM c.Fecha) = 2026;
 
--- Verificar manualmente la suma total de las ganancias de la sucursal 10 durante el año 2026.
-SELECT SUM(c.Precio)
-FROM CobrarConsulta c
-JOIN Medico m
-    ON c.RFCMedico = m.RFC
-WHERE m.IdSucursal = 10
-  AND EXTRACT(YEAR FROM c.Fecha) = 2026;
+--Suma el dinero de todos los tickets (ventas) de la sucursal 10 en 2026.
+SELECT SUM(t.PrecioNeto)
+FROM Ticket t
+WHERE t.IdSucursal = 10
+  AND EXTRACT(YEAR FROM t.FechaPago) = 2026;
 
 
 

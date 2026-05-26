@@ -31,18 +31,27 @@ CREATE OR REPLACE FUNCTION GananciasSucursal2026(
 RETURNS NUMERIC(12,2)
 AS $$
 DECLARE
-    total_ganancias NUMERIC(12,2);
+    total_consultas NUMERIC(12,2);
+    total_tickets NUMERIC(12,2);
 BEGIN
 
+    -- Ganancias de consultas
     SELECT SUM(c.Precio)
-    INTO total_ganancias
+    INTO total_consultas
     FROM CobrarConsulta c
-    JOIN Medico m
-        ON c.RFCMedico = m.RFC
+    JOIN Medico m ON c.RFCMedico = m.RFC
     WHERE m.IdSucursal = p_IdSucursal
       AND EXTRACT(YEAR FROM c.Fecha) = 2026;
 
-    RETURN total_ganancias;
+    -- Ganancias de tickets
+    SELECT SUM(t.PrecioNeto)
+    INTO total_tickets
+    FROM Ticket t
+    WHERE t.IdSucursal = p_IdSucursal
+      AND EXTRACT(YEAR FROM t.FechaPago) = 2026;
+
+    -- Suma final
+    RETURN total_consultas + total_tickets;
 
 END;
 $$ LANGUAGE plpgsql;

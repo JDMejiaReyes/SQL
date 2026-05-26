@@ -628,3 +628,5 @@ INSERT INTO CobrarConsulta(Fecha,Hora,Diagnostico,Precio,IdCliente,RFCMedico,RFC
 
 INSERT INTO CobrarConsulta(Fecha,Hora,Diagnostico,Precio,IdCliente,RFCMedico,RFCEnfermero,FolioTicket) VALUES ('2026-05-07','15:18','In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.',5725.40,9,'AYIT890221K06','XJCA211005B38',7);
 INSERT INTO CobrarConsulta(Fecha,Hora,Diagnostico,Precio,IdCliente,RFCMedico,RFCEnfermero,FolioTicket) VALUES('2026-05-07','15:20','Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.',5280.90,2,'AYIT890221K06','VGMB840710277',10);
+
+INSERT INTO Ticket (FechaPago, HoraPago, TipoVenta, PrecioBruto, PrecioNeto, IdSucursal, IdCliente, EsTicketConsulta, EsTicketMedicamento) VALUES ('2026-03-15','14:30:00','Presencial',1200.00,1000.00,10,5,TRUE,FALSE);
