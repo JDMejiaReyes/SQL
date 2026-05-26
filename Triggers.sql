@@ -5,9 +5,82 @@
 
 /*
 i. Un trigger que se encargue de actualizar el stock de los productos cada vez que un proveedor provea un
-medicamento, cada vez que un farmaceutico cree un medicamento y cada vez que un cliente compre el medicamento.
+medicamento, cada vez que un farmacéutico cree un medicamento y cada vez que un cliente compre el medicamento.
 */
 
+--FUNCIONES DEL DISPARADOR
+-- Función para calcular el stock comercial actual (Entradas - Salidas)
+CREATE OR REPLACE FUNCTION fn_calcular_stock_comercial(p_id_medicamento INT)
+RETURNS INTEGER AS $$
+DECLARE
+    v_entradas INTEGER := 0;
+    v_salidas INTEGER := 0;
+BEGIN
+    -- Entradas: Suma de la tabla EntregarMedComercial
+    SELECT COALESCE(SUM(CantidadRecibida), 0) INTO v_entradas
+    FROM EntregarMedComercial 
+    WHERE IdMedicamento = p_id_medicamento;
+
+    -- Salidas: Suma de la tabla TenerMedComercial
+    SELECT COALESCE(SUM(CantidadComprada), 0) INTO v_salidas
+    FROM TenerMedComercial 
+    WHERE IdMedicamento = p_id_medicamento;
+
+    RETURN v_entradas - v_salidas;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Función para calcular el stock preparado actual (Entradas - Salidas)
+CREATE OR REPLACE FUNCTION fn_calcular_stock_preparado(p_id_medicamento INT)
+RETURNS INTEGER AS $$
+DECLARE
+    v_entradas INTEGER := 0;
+    v_salidas INTEGER := 0;
+BEGIN
+    -- Entradas: Suma de la tabla Elaborar
+    SELECT COALESCE(SUM(CantidadElaborada), 0) INTO v_entradas
+    FROM Elaborar 
+    WHERE IdMedicamento = p_id_medicamento;
+
+    -- Salidas: Suma de la tabla TenerMedPreparado
+    SELECT COALESCE(SUM(CantidadComprada), 0) INTO v_salidas
+    FROM TenerMedPreparado 
+    WHERE IdMedicamento = p_id_medicamento;
+
+    RETURN v_entradas - v_salidas;
+END;
+$$ LANGUAGE plpgsql;
+
+--CREACIÓN DEL DISPARADOR
+-- Trigger para validar venta de Medicamentos Comerciales
+CREATE OR REPLACE FUNCTION fn_validar_venta_comercial() RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.CantidadComprada > fn_calcular_stock_comercial(NEW.IdMedicamento) THEN
+        RAISE EXCEPTION 'Stock insuficiente para el medicamento comercial ID %. Stock actual: %', 
+            NEW.IdMedicamento, fn_calcular_stock_comercial(NEW.IdMedicamento);
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_valida_stock_comercial
+BEFORE INSERT ON TenerMedComercial
+FOR EACH ROW EXECUTE PROCEDURE fn_validar_venta_comercial();
+
+-- Trigger para validar venta de Medicamentos Preparados
+CREATE OR REPLACE FUNCTION fn_validar_venta_preparado() RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.CantidadComprada > fn_calcular_stock_preparado(NEW.IdMedicamento) THEN
+        RAISE EXCEPTION 'Stock insuficiente para el medicamento preparado ID %. Stock actual: %', 
+            NEW.IdMedicamento, fn_calcular_stock_preparado(NEW.IdMedicamento);
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_valida_stock_preparado
+BEFORE INSERT ON TenerMedPreparado
+FOR EACH ROW EXECUTE PROCEDURE fn_validar_venta_preparado();
 
 
 /*
