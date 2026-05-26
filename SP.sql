@@ -1,6 +1,6 @@
 -- i. Un SP el cual se encarga de registrar un farmaceutico, en este SP, deber ́as introducir la informaci ́on del
 -- farmaceutico y se debe de encargar de insertar en la tabla correspondiente, es importante que no permitan
--- la inserci ́on de n ́umero o s ́ımbolos cuando sean campos relacionados a nombres.
+-- la insercion de numero o sımbolos cuando sean campos relacionados a nombres.
 CREATE OR REPLACE PROCEDURE registrar_farmaceutico(
     p_RFC VARCHAR,
     p_Nombre VARCHAR,
@@ -37,7 +37,7 @@ BEGIN
         RAISE EXCEPTION 'Error de validación: El apellido materno "%" no puede contener números ni símbolos.', p_Materno;
     END IF;
 
-    -- Inserción directa en la tabla 'Farmaceutico' usando tus columnas exactas
+    -- Inserción directa en la tabla 'Farmaceutico' usando las columnas exactas
     INSERT INTO Farmaceutico (
         RFC, Nombre, Paterno, Materno, Calle, NumeroExterior, NumeroInterior,
         Colonia, Estado, Dia, Entrada, Salida, Salario, IdSucursal,
