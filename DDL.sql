@@ -3,7 +3,7 @@ CREATE SCHEMA public;
 
 
 -- =================================================================
---                             MÓDULO 1 
+--                             MÓDULO 1
 -- =================================================================
 
 -- Tabla 1
@@ -27,21 +27,14 @@ ALTER TABLE Sucursal
 ALTER COLUMN NombreSucursal SET NOT NULL,
 ALTER COLUMN Calle SET NOT NULL,
 ALTER COLUMN NumeroExterior SET NOT NULL,
+ADD CONSTRAINT Sucursal_d1 CHECK (NumeroInterior IS NULL OR NumeroInterior > 0),
+ADD CONSTRAINT Sucursal_d2 CHECK (NumeroExterior > 0),
 ALTER COLUMN Colonia SET NOT NULL,
 ALTER COLUMN Estado SET NOT NULL,
 ALTER COLUMN Telefono SET NOT NULL;
 
 -- =================================================================
---                      BLOQUE DE CORRECCIONES 
--- =================================================================
--- Se agrega restricción a NumeroInterior CHECK es NULL o mayor a cero
-ALTER TABLE Sucursal
-ADD CONSTRAINT Sucursal_d1 CHECK (NumeroInterior IS NULL OR NumeroInterior > 0),
--- Se agrega restricción a NumeroExterior CHECK es mayor a cero
-ADD CONSTRAINT Sucursal_d2 CHECK (NumeroExterior > 0);
-
--- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Sucursal IS 'Tabla que almacena la ubicación y contacto de las sucursales del sistema Hotline.';
 
@@ -66,7 +59,6 @@ CREATE TABLE Clinica (
     IdClinica SERIAL,
     NombreClinica VARCHAR(50),
     NumCuarto INTEGER,
-    NumEmpleado INTEGER,
     IdSucursal INTEGER
 );
 
@@ -84,18 +76,11 @@ ALTER TABLE Clinica
 ALTER COLUMN NombreClinica SET NOT NULL,
 ALTER COLUMN NumCuarto SET NOT NULL,
 ADD CONSTRAINT Clinica_d1 CHECK (NumCuarto > 0),
-ALTER COLUMN NumEmpleado SET NOT NULL,
 ALTER COLUMN IdSucursal SET NOT NULL,
 ADD CONSTRAINT Clinica_u1 UNIQUE (IdSucursal);
 
 -- =================================================================
---                      BLOQUE DE CORRECCIONES 
--- =================================================================
--- Se elimina porque el número de empleados se calcula con funciones de agregación (DQL)
-ALTER TABLE Clinica DROP COLUMN NumEmpleado;
-
--- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Clinica IS 'Tabla que representa las clínicas médicas integradas dentro de una sucursal.';
 
@@ -110,6 +95,7 @@ COMMENT ON CONSTRAINT Clinica_pk ON Clinica IS 'Llave primaria: Identificador de
 COMMENT ON CONSTRAINT Clinica_fk ON Clinica IS 'Llave foránea: Vinculación obligatoria con una sucursal.';
 COMMENT ON CONSTRAINT Clinica_d1 ON Clinica IS 'Validación: El número de cuarto asignado debe ser positivo.';
 COMMENT ON CONSTRAINT Clinica_u1 ON Clinica IS 'Restricción: Garantiza que una sucursal solo tenga una clínica (relación 1:1).';
+
 
 -- Tabla 3
 CREATE TABLE Medico (
@@ -129,7 +115,8 @@ CREATE TABLE Medico (
     IdSucursal INTEGER,
     InstitucionEgreso VARCHAR(100),
     VigenciaCertificacion DATE,
-    CedulaProfesional INTEGER
+    CedulaProfesional INTEGER,
+    FechaNacimiento DATE
 );
 
 -- PK
@@ -160,29 +147,14 @@ ALTER COLUMN IdSucursal SET NOT NULL,
 ALTER COLUMN InstitucionEgreso SET NOT NULL,
 ALTER COLUMN VigenciaCertificacion SET NOT NULL,
 ALTER COLUMN CedulaProfesional SET NOT NULL,
-ADD CONSTRAINT Medico_u1 UNIQUE (CedulaProfesional);
-
--- =================================================================
---                      BLOQUE DE CORRECCIONES 
--- =================================================================
--- Se agrega restricción a NumeroInterior CHECK es NULL o mayor a cero
-ALTER TABLE Medico
+ADD CONSTRAINT Medico_u1 UNIQUE (CedulaProfesional),
+ALTER COLUMN FechaNacimiento SET NOT NULL,
 ADD CONSTRAINT Medico_d2 CHECK (NumeroInterior IS NULL OR NumeroInterior > 0),
--- Se agrega restricción a NumeroExterior CHECK es mayor a cero
-ADD CONSTRAINT Medico_d3 CHECK (NumeroExterior > 0);
-
--- =================================================================
---                    BLOQUE DE ADICIONES PARA P07 
--- =================================================================
--- Se agrega el atributo fecha de nacimiento y se agrega la restricción NOT NULL
--- junto con la restricción CHECK FechaNacimiento <= CURRENT_DATE
-ALTER TABLE Medico
-ADD COLUMN FechaNacimiento DATE NOT NULL,
+ADD CONSTRAINT Medico_d3 CHECK (NumeroExterior > 0),
 ADD CONSTRAINT Medico_d4 CHECK (FechaNacimiento <= CURRENT_DATE);
-COMMENT ON CONSTRAINT Medico_d4 ON Medico IS 'Validación: La fecha de nacimiento no puede ser futura.';
 
 -- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Medico IS 'Tabla que almacena la información detallada del personal médico.';
 
@@ -213,6 +185,7 @@ COMMENT ON CONSTRAINT Medico_d1 ON Medico IS 'Validación: El salario debe ser e
 COMMENT ON CONSTRAINT Medico_u1 ON Medico IS 'Restricción: Garantiza la unicidad de la cédula profesional.';
 COMMENT ON CONSTRAINT Medico_d2 ON Medico IS 'Validación: El número interior debe ser positivo si existe.';
 COMMENT ON CONSTRAINT Medico_d3 ON Medico IS 'Validación: El número exterior debe ser estrictamente positivo.';
+COMMENT ON CONSTRAINT Medico_d4 ON Medico IS 'Validación: La fecha de nacimiento no puede ser futura.';
 
 
 -- Tabla 4
@@ -233,7 +206,8 @@ CREATE TABLE Enfermero (
     IdSucursal INTEGER,
     TipoProcedimientoCargo VARCHAR(100),
     CertificacionReanimacion BOOLEAN,
-    CedulaProfesional INTEGER
+    CedulaProfesional INTEGER,
+    FechaNacimiento DATE
 );
 
 -- PK
@@ -264,29 +238,14 @@ ALTER COLUMN IdSucursal SET NOT NULL,
 ALTER COLUMN TipoProcedimientoCargo SET NOT NULL,
 ALTER COLUMN CertificacionReanimacion SET NOT NULL,
 ALTER COLUMN CedulaProfesional SET NOT NULL,
-ADD CONSTRAINT Enfermero_u1 UNIQUE (CedulaProfesional);
-
--- =================================================================
---                      BLOQUE DE CORRECCIONES 
--- =================================================================
--- Se agrega restricción a NumeroInterior CHECK es NULL o mayor a cero
-ALTER TABLE Enfermero
+ADD CONSTRAINT Enfermero_u1 UNIQUE (CedulaProfesional),
+ALTER COLUMN FechaNacimiento SET NOT NULL,
 ADD CONSTRAINT Enfermero_d2 CHECK (NumeroInterior IS NULL OR NumeroInterior > 0),
--- Se agrega restricción a NumeroExterior CHECK es mayor a cero
-ADD CONSTRAINT Enfermero_d3 CHECK (NumeroExterior > 0);
-
--- =================================================================
---                    BLOQUE DE ADICIONES PARA P07 
--- =================================================================
--- Se agrega el atributo fecha de nacimiento y se agrega la restricción NOT NULL
--- junto con la restricción CHECK FechaNacimiento <= CURRENT_DATE
-ALTER TABLE Enfermero
-ADD COLUMN FechaNacimiento DATE NOT NULL,
+ADD CONSTRAINT Enfermero_d3 CHECK (NumeroExterior > 0),
 ADD CONSTRAINT Enfermero_d4 CHECK (FechaNacimiento <= CURRENT_DATE);
-COMMENT ON CONSTRAINT Enfermero_d4 ON Enfermero IS 'Validación: La fecha de nacimiento no puede ser futura.';
 
 -- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Enfermero IS 'Tabla que registra al personal de enfermería y sus certificaciones.';
 
@@ -317,6 +276,8 @@ COMMENT ON CONSTRAINT Enfermero_d1 ON Enfermero IS 'Validación: El salario debe
 COMMENT ON CONSTRAINT Enfermero_u1 ON Enfermero IS 'Restricción: Unicidad de la cédula profesional del enfermero.';
 COMMENT ON CONSTRAINT Enfermero_d2 ON Enfermero IS 'Validación: Número interior positivo o nulo.';
 COMMENT ON CONSTRAINT Enfermero_d3 ON Enfermero IS 'Validación: Número exterior estrictamente positivo.';
+COMMENT ON CONSTRAINT Enfermero_d4 ON Enfermero IS 'Validación: La fecha de nacimiento no puede ser futura.';
+
 
 -- Tabla 5
 CREATE TABLE Farmaceutico (
@@ -334,7 +295,8 @@ CREATE TABLE Farmaceutico (
     Salida TIME,
     Salario NUMERIC(7, 2),
     IdSucursal INTEGER,
-    CedulaProfesional INTEGER
+    CedulaProfesional INTEGER,
+    FechaNacimiento DATE
 );
 
 -- PK
@@ -363,29 +325,14 @@ ALTER COLUMN Salario SET NOT NULL,
 ADD CONSTRAINT Farmaceutico_d1 CHECK (Salario > 0),
 ALTER COLUMN IdSucursal SET NOT NULL,
 ALTER COLUMN CedulaProfesional SET NOT NULL,
-ADD CONSTRAINT Farmaceutico_u1 UNIQUE (CedulaProfesional);
-
--- =================================================================
---                      BLOQUE DE CORRECCIONES 
--- =================================================================
--- Se agrega restricción a NumeroInterior CHECK es NULL o mayor a cero
-ALTER TABLE Farmaceutico
+ADD CONSTRAINT Farmaceutico_u1 UNIQUE (CedulaProfesional),
+ALTER COLUMN FechaNacimiento SET NOT NULL,
 ADD CONSTRAINT Farmaceutico_d2 CHECK (NumeroInterior IS NULL OR NumeroInterior > 0),
--- Se agrega restricción a NumeroExterior CHECK es mayor a cero
-ADD CONSTRAINT Farmaceutico_d3 CHECK (NumeroExterior > 0);
-
--- =================================================================
---                    BLOQUE DE ADICIONES PARA P07 
--- =================================================================
--- Se agrega el atributo fecha de nacimiento y se agrega la restricción NOT NULL
--- junto con la restricción CHECK FechaNacimiento <= CURRENT_DATE
-ALTER TABLE Farmaceutico
-ADD COLUMN FechaNacimiento DATE NOT NULL,
+ADD CONSTRAINT Farmaceutico_d3 CHECK (NumeroExterior > 0),
 ADD CONSTRAINT Farmaceutico_d4 CHECK (FechaNacimiento <= CURRENT_DATE);
-COMMENT ON CONSTRAINT Farmaceutico_d4 ON Farmaceutico IS 'Validación: La fecha de nacimiento no puede ser futura.';
 
 -- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Farmaceutico IS 'Tabla que almacena los datos de los responsables de farmacia.';
 
@@ -414,6 +361,7 @@ COMMENT ON CONSTRAINT Farmaceutico_d1 ON Farmaceutico IS 'Validación: Salario p
 COMMENT ON CONSTRAINT Farmaceutico_u1 ON Farmaceutico IS 'Restricción: Unicidad de la cédula profesional.';
 COMMENT ON CONSTRAINT Farmaceutico_d2 ON Farmaceutico IS 'Validación: Número interior válido.';
 COMMENT ON CONSTRAINT Farmaceutico_d3 ON Farmaceutico IS 'Validación: Número exterior positivo.';
+COMMENT ON CONSTRAINT Farmaceutico_d4 ON Farmaceutico IS 'Validación: La fecha de nacimiento no puede ser futura.';
 
 
 -- Tabla 6
@@ -431,7 +379,8 @@ CREATE TABLE Cajero (
     Entrada TIME,
     Salida TIME,
     Salario NUMERIC(7, 2),
-    IdSucursal INTEGER
+    IdSucursal INTEGER,
+    FechaNacimiento DATE
 );
 
 -- PK
@@ -458,29 +407,14 @@ ALTER COLUMN Entrada SET NOT NULL,
 ALTER COLUMN Salida SET NOT NULL,
 ALTER COLUMN Salario SET NOT NULL,
 ADD CONSTRAINT Cajero_d1 CHECK (Salario > 0),
-ALTER COLUMN IdSucursal SET NOT NULL;
-
--- =================================================================
---                      BLOQUE DE CORRECCIONES 
--- =================================================================
--- Se agrega restricción a NumeroInterior CHECK es NULL o mayor a cero
-ALTER TABLE Cajero
+ALTER COLUMN IdSucursal SET NOT NULL,
+ALTER COLUMN FechaNacimiento SET NOT NULL,
 ADD CONSTRAINT Cajero_d2 CHECK (NumeroInterior IS NULL OR NumeroInterior > 0),
--- Se agrega restricción a NumeroExterior CHECK es mayor a cero
-ADD CONSTRAINT Cajero_d3 CHECK (NumeroExterior > 0);
-
--- =================================================================
---                    BLOQUE DE ADICIONES PARA P07 
--- =================================================================
--- Se agrega el atributo fecha de nacimiento y se agrega la restricción NOT NULL
--- junto con la restricción CHECK FechaNacimiento <= CURRENT_DATE
-ALTER TABLE Cajero
-ADD COLUMN FechaNacimiento DATE NOT NULL,
+ADD CONSTRAINT Cajero_d3 CHECK (NumeroExterior > 0),
 ADD CONSTRAINT Cajero_d4 CHECK (FechaNacimiento <= CURRENT_DATE);
-COMMENT ON CONSTRAINT Cajero_d4 ON Cajero IS 'Validación: La fecha de nacimiento no puede ser futura.';
 
 -- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Cajero IS 'Tabla que registra al personal encargado de cobros y facturación.';
 
@@ -507,6 +441,7 @@ COMMENT ON CONSTRAINT Cajero_fk ON Cajero IS 'Llave foránea: Sucursal de asigna
 COMMENT ON CONSTRAINT Cajero_d1 ON Cajero IS 'Validación: El salario debe ser mayor a cero.';
 COMMENT ON CONSTRAINT Cajero_d2 ON Cajero IS 'Validación: Número interior válido.';
 COMMENT ON CONSTRAINT Cajero_d3 ON Cajero IS 'Validación: Número exterior estrictamente positivo.';
+COMMENT ON CONSTRAINT Cajero_d4 ON Cajero IS 'Validación: La fecha de nacimiento no puede ser futura.';
 
 
 -- Tabla 7
@@ -524,7 +459,8 @@ CREATE TABLE Aseador (
     Entrada TIME,
     Salida TIME,
     Salario NUMERIC(7, 2),
-    IdSucursal INTEGER
+    IdSucursal INTEGER,
+    FechaNacimiento DATE
 );
 
 -- PK
@@ -551,29 +487,14 @@ ALTER COLUMN Entrada SET NOT NULL,
 ALTER COLUMN Salida SET NOT NULL,
 ALTER COLUMN Salario SET NOT NULL,
 ADD CONSTRAINT Aseador_d1 CHECK (Salario > 0),
-ALTER COLUMN IdSucursal SET NOT NULL;
-
--- =================================================================
---                      BLOQUE DE CORRECCIONES 
--- =================================================================
--- Se agrega restricción a NumeroInterior CHECK es NULL o mayor a cero
-ALTER TABLE Aseador
+ALTER COLUMN IdSucursal SET NOT NULL,
+ALTER COLUMN FechaNacimiento SET NOT NULL,
 ADD CONSTRAINT Aseador_d2 CHECK (NumeroInterior IS NULL OR NumeroInterior > 0),
--- Se agrega restricción a NumeroExterior CHECK es mayor a cero
-ADD CONSTRAINT Aseador_d3 CHECK (NumeroExterior > 0);
-
--- =================================================================
---                    BLOQUE DE ADICIONES PARA P07 
--- =================================================================
--- Se agrega el atributo fecha de nacimiento y se agrega la restricción NOT NULL
--- junto con la restricción CHECK FechaNacimiento <= CURRENT_DATE
-ALTER TABLE Aseador
-ADD COLUMN FechaNacimiento DATE NOT NULL,
+ADD CONSTRAINT Aseador_d3 CHECK (NumeroExterior > 0),
 ADD CONSTRAINT Aseador_d4 CHECK (FechaNacimiento <= CURRENT_DATE);
-COMMENT ON CONSTRAINT Aseador_d4 ON Aseador IS 'Validación: La fecha de nacimiento no puede ser futura.';
 
 -- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Aseador IS 'Tabla que registra al personal encargado de la limpieza.';
 
@@ -600,6 +521,7 @@ COMMENT ON CONSTRAINT Aseador_fk ON Aseador IS 'Llave foránea: Sucursal donde l
 COMMENT ON CONSTRAINT Aseador_d1 ON Aseador IS 'Validación: El salario debe ser positivo.';
 COMMENT ON CONSTRAINT Aseador_d2 ON Aseador IS 'Validación: Número interior positivo o nulo.';
 COMMENT ON CONSTRAINT Aseador_d3 ON Aseador IS 'Validación: Número exterior estrictamente positivo.';
+COMMENT ON CONSTRAINT Aseador_d4 ON Aseador IS 'Validación: La fecha de nacimiento no puede ser futura.';
 
 
 -- Tabla 8
@@ -617,7 +539,8 @@ CREATE TABLE Cuidador (
     Entrada TIME,
     Salida TIME,
     Salario NUMERIC(7, 2),
-    IdSucursal INTEGER
+    IdSucursal INTEGER,
+    FechaNacimiento DATE
 );
 
 -- PK
@@ -644,29 +567,14 @@ ALTER COLUMN Entrada SET NOT NULL,
 ALTER COLUMN Salida SET NOT NULL,
 ALTER COLUMN Salario SET NOT NULL,
 ADD CONSTRAINT Cuidador_d1 CHECK (Salario > 0),
-ALTER COLUMN IdSucursal SET NOT NULL;
-
--- =================================================================
---                      BLOQUE DE CORRECCIONES 
--- =================================================================
--- Se agrega restricción a NumeroInterior CHECK es NULL o mayor a cero
-ALTER TABLE Cuidador
+ALTER COLUMN IdSucursal SET NOT NULL,
+ALTER COLUMN FechaNacimiento SET NOT NULL,
 ADD CONSTRAINT Cuidador_d2 CHECK (NumeroInterior IS NULL OR NumeroInterior > 0),
--- Se agrega restricción a NumeroExterior CHECK es mayor a cero
-ADD CONSTRAINT Cuidador_d3 CHECK (NumeroExterior > 0);
-
--- =================================================================
---                    BLOQUE DE ADICIONES PARA P07 
--- =================================================================
--- Se agrega el atributo fecha de nacimiento y se agrega la restricción NOT NULL
--- junto con la restricción CHECK FechaNacimiento <= CURRENT_DATE
-ALTER TABLE Cuidador
-ADD COLUMN FechaNacimiento DATE NOT NULL,
+ADD CONSTRAINT Cuidador_d3 CHECK (NumeroExterior > 0),
 ADD CONSTRAINT Cuidador_d4 CHECK (FechaNacimiento <= CURRENT_DATE);
-COMMENT ON CONSTRAINT Cuidador_d4 ON Cuidador IS 'Validación: La fecha de nacimiento no puede ser futura.';
 
 -- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Cuidador IS 'Tabla que registra al personal de asistencia o cuidadores.';
 
@@ -693,6 +601,7 @@ COMMENT ON CONSTRAINT Cuidador_fk ON Cuidador IS 'Llave foránea: Sucursal de ad
 COMMENT ON CONSTRAINT Cuidador_d1 ON Cuidador IS 'Validación: El salario debe ser estrictamente positivo.';
 COMMENT ON CONSTRAINT Cuidador_d2 ON Cuidador IS 'Validación: Número interior positivo o nulo.';
 COMMENT ON CONSTRAINT Cuidador_d3 ON Cuidador IS 'Validación: Número exterior estrictamente positivo.';
+COMMENT ON CONSTRAINT Cuidador_d4 ON Cuidador IS 'Validación: La fecha de nacimiento no puede ser futura.';
 
 
 -- Tabla 9
@@ -715,7 +624,7 @@ ALTER TABLE Telefonos_Medico
 ADD CONSTRAINT Telefonos_Medico_v CHECK (Telefono ~ '^(\+[0-9]{1,3})?[0-9]{10}$');
 
 -- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Telefonos_Medico IS 'Atributo multivaluado que almacena los teléfonos de los médicos.';
 
@@ -749,7 +658,7 @@ ALTER TABLE Correos_Medico
 ADD CONSTRAINT Correos_Medico_v CHECK (Correo ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$');
 
 -- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Correos_Medico IS 'Atributo multivaluado que almacena los correos electrónicos de los médicos.';
 
@@ -779,7 +688,7 @@ FOREIGN KEY (RFC) REFERENCES Medico(RFC)
 ON UPDATE CASCADE ON DELETE CASCADE;
 
 -- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Especialidades IS 'Atributo multivaluado que registra las especialidades médicas.';
 
@@ -812,7 +721,7 @@ ALTER TABLE Telefonos_Enfermero
 ADD CONSTRAINT Telefonos_Enfermero_v CHECK (Telefono ~ '^(\+[0-9]{1,3})?[0-9]{10}$');
 
 -- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Telefonos_Enfermero IS 'Atributo multivaluado: Teléfonos de contacto de enfermeros.';
 
@@ -824,6 +733,7 @@ COMMENT ON COLUMN Telefonos_Enfermero.Telefono IS 'Número telefónico de contac
 COMMENT ON CONSTRAINT Telefonos_Enfermero_pk ON Telefonos_Enfermero IS 'Llave primaria compuesta (RFC y Telefono).';
 COMMENT ON CONSTRAINT Telefonos_Enfermero_fk ON Telefonos_Enfermero Is 'Llave foránea: Vinculación con la tabla Enfermero.';
 COMMENT ON CONSTRAINT Telefonos_Enfermero_v ON Telefonos_Enfermero IS 'Validación: Formato de número telefónico (10 dígitos, opcionalmente con código de país).';
+
 
 -- Tabla 13
 CREATE TABLE Correos_Enfermero (
@@ -845,7 +755,7 @@ ALTER TABLE Correos_Enfermero
 ADD CONSTRAINT Correos_Enfermero_v CHECK (Correo ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$');
 
 -- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Correos_Enfermero IS 'Atributo multivaluado: Correos electrónicos de enfermeros.';
 
@@ -879,7 +789,7 @@ ALTER TABLE Telefonos_Farmaceutico
 ADD CONSTRAINT Telefonos_Farmaceutico_v CHECK (Telefono ~ '^(\+[0-9]{1,3})?[0-9]{10}$');
 
 -- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Telefonos_Farmaceutico IS 'Atributo multivaluado: Teléfonos de farmacéuticos.';
 
@@ -891,6 +801,7 @@ COMMENT ON COLUMN Telefonos_Farmaceutico.Telefono IS 'Número telefónico de con
 COMMENT ON CONSTRAINT Telefonos_Farmaceutico_pk ON Telefonos_Farmaceutico IS 'Llave primaria compuesta (RFC y Telefono).';
 COMMENT ON CONSTRAINT Telefonos_Farmaceutico_fk ON Telefonos_Farmaceutico IS 'Llave foránea: Vinculación con la tabla Farmaceutico.';
 COMMENT ON CONSTRAINT Telefonos_Farmaceutico_v ON Telefonos_Farmaceutico IS 'Validación: Formato de número telefónico (10 dígitos, opcionalmente con código de país).';
+
 
 -- Tabla 15
 CREATE TABLE Correos_Farmaceutico (
@@ -912,7 +823,7 @@ ALTER TABLE Correos_Farmaceutico
 ADD CONSTRAINT Correos_Farmaceutico_v CHECK (Correo ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$');
 
 -- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Correos_Farmaceutico IS 'Atributo multivaluado: Correos de farmacéuticos.';
 
@@ -924,6 +835,7 @@ COMMENT ON COLUMN Correos_Farmaceutico.Correo IS 'Dirección de correo electrón
 COMMENT ON CONSTRAINT Correos_Farmaceutico_pk ON Correos_Farmaceutico IS 'Llave primaria compuesta (RFC y Correo).';
 COMMENT ON CONSTRAINT Correos_Farmaceutico_fk ON Correos_Farmaceutico IS 'Llave foránea: Vinculación con la tabla Farmaceutico.';
 COMMENT ON CONSTRAINT Correos_Farmaceutico_v ON Correos_Farmaceutico IS 'Validación: Formato de correo electrónico.';
+
 
 -- Tabla 16
 CREATE TABLE Especialidades_Preparacion (
@@ -941,7 +853,7 @@ FOREIGN KEY (RFC) REFERENCES Farmaceutico(RFC)
 ON UPDATE CASCADE ON DELETE CASCADE;
 
 -- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Especialidades_Preparacion IS 'Atributo multivaluado: Especialidades en fórmulas magistrales.';
 
@@ -974,7 +886,7 @@ ALTER TABLE Telefonos_Cajero
 ADD CONSTRAINT Telefonos_Cajero_v CHECK (Telefono ~ '^(\+[0-9]{1,3})?[0-9]{10}$');
 
 -- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Telefonos_Cajero IS 'Atributo multivaluado: Teléfonos de cajeros.';
 
@@ -986,6 +898,7 @@ COMMENT ON COLUMN Telefonos_Cajero.Telefono IS 'Número telefónico de contacto.
 COMMENT ON CONSTRAINT Telefonos_Cajero_pk ON Telefonos_Cajero IS 'Llave primaria compuesta (RFC y Telefono).';
 COMMENT ON CONSTRAINT Telefonos_Cajero_fk ON Telefonos_Cajero IS 'Llave foránea: Vinculación con la tabla Cajero.';
 COMMENT ON CONSTRAINT Telefonos_Cajero_v ON Telefonos_Cajero IS 'Validación: Formato de número telefónico (10 dígitos, opcionalmente con código de país)..';
+
 
 -- Tabla 18
 CREATE TABLE Correos_Cajero (
@@ -1007,7 +920,7 @@ ALTER TABLE Correos_Cajero
 ADD CONSTRAINT Correos_Cajero_v CHECK (Correo ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$');
 
 -- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Correos_Cajero IS 'Atributo multivaluado: Correos de cajeros.';
 
@@ -1019,6 +932,7 @@ COMMENT ON COLUMN Correos_Cajero.Correo IS 'Dirección de correo electrónico.';
 COMMENT ON CONSTRAINT Correos_Cajero_pk ON Correos_Cajero IS 'Llave primaria compuesta (RFC y Correo).';
 COMMENT ON CONSTRAINT Correos_Cajero_fk ON Correos_Cajero IS 'Llave foránea: Vinculación con la tabla Cajero.';
 COMMENT ON CONSTRAINT Correos_Cajero_v ON Correos_Cajero IS 'Validación: Formato de correo electrónico.';
+
 
 -- Tabla 19
 CREATE TABLE Telefonos_Aseador (
@@ -1040,7 +954,7 @@ ALTER TABLE Telefonos_Aseador
 ADD CONSTRAINT Telefonos_Aseador_v CHECK (Telefono ~ '^(\+[0-9]{1,3})?[0-9]{10}$');
 
 -- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Telefonos_Aseador IS 'Atributo multivaluado: Teléfonos de aseadores.';
 
@@ -1052,6 +966,7 @@ COMMENT ON COLUMN Telefonos_Aseador.Telefono IS 'Número telefónico de contacto
 COMMENT ON CONSTRAINT Telefonos_Aseador_pk ON Telefonos_Aseador IS 'Llave primaria compuesta (RFC y Telefono).';
 COMMENT ON CONSTRAINT Telefonos_Aseador_fk ON Telefonos_Aseador IS 'Llave foránea: Vinculación con la tabla Aseador.';
 COMMENT ON CONSTRAINT Telefonos_Aseador_v ON Telefonos_Aseador IS 'Validación: Formato de número telefónico (10 dígitos, opcionalmente con código de país).';
+
 
 -- Tabla 20
 CREATE TABLE Correos_Aseador (
@@ -1073,7 +988,7 @@ ALTER TABLE Correos_Aseador
 ADD CONSTRAINT Correos_Aseador_v CHECK (Correo ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$');
 
 -- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Correos_Aseador IS 'Atributo multivaluado: Correos de aseadores.';
 
@@ -1085,6 +1000,7 @@ COMMENT ON COLUMN Correos_Aseador.Correo IS 'Dirección de correo electrónico.'
 COMMENT ON CONSTRAINT Correos_Aseador_pk ON Correos_Aseador IS 'Llave primaria compuesta (RFC y Correo).';
 COMMENT ON CONSTRAINT Correos_Aseador_fk ON Correos_Aseador IS 'Llave foránea: Vinculación con la tabla Aseador.';
 COMMENT ON CONSTRAINT Correos_Aseador_v ON Correos_Aseador IS 'Validación: Formato de correo electrónico.';
+
 
 -- Tabla 21
 CREATE TABLE Telefonos_Cuidador (
@@ -1106,7 +1022,7 @@ ALTER TABLE Telefonos_Cuidador
 ADD CONSTRAINT Telefonos_Cuidador_v CHECK (Telefono ~ '^(\+[0-9]{1,3})?[0-9]{10}$');
 
 -- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Telefonos_Cuidador IS 'Atributo multivaluado: Teléfonos de cuidadores.';
 
@@ -1118,6 +1034,7 @@ COMMENT ON COLUMN Telefonos_Cuidador.Telefono IS 'Número telefónico de contact
 COMMENT ON CONSTRAINT Telefonos_Cuidador_pk ON Telefonos_Cuidador IS 'Llave primaria compuesta (RFC y Telefono).';
 COMMENT ON CONSTRAINT Telefonos_Cuidador_fk ON Telefonos_Cuidador IS 'Llave foránea: Vinculación con la tabla Cuidador.';
 COMMENT ON CONSTRAINT Telefonos_Cuidador_v ON Telefonos_Cuidador IS 'Validación: Formato de número telefónico (10 dígitos, opcionalmente con código de país).';
+
 
 -- Tabla 22
 CREATE TABLE Correos_Cuidador (
@@ -1139,7 +1056,7 @@ ALTER TABLE Correos_Cuidador
 ADD CONSTRAINT Correos_Cuidador_v CHECK (Correo ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$');
 
 -- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Correos_Cuidador IS 'Atributo multivaluado: Correos de cuidadores.';
 
@@ -1176,7 +1093,7 @@ ALTER COLUMN Apertura SET NOT NULL,
 ALTER COLUMN Cierre SET NOT NULL;
 
 -- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Horarios_Sucursal IS 'Tabla que define los horarios de apertura y cierre de las sucursales.';
 
@@ -1214,7 +1131,7 @@ ALTER COLUMN Apertura SET NOT NULL,
 ALTER COLUMN Cierre SET NOT NULL;
 
 -- =================================================================
---                      BLOQUE DE COMENTARIOS 
+--                      BLOQUE DE COMENTARIOS
 -- =================================================================
 COMMENT ON TABLE Horarios_Clinica IS 'Tabla que define los horarios de servicio de las clínicas.';
 
@@ -1897,7 +1814,7 @@ ADD CONSTRAINT Ticket_d1 CHECK (TipoVenta IN ('Presencial', 'Web')),
 ALTER COLUMN IdCliente SET NOT NULL,
 ALTER COLUMN IdSucursal SET NOT NULL,
 
--- NUEVAS RESTRICCIONES DE HERENCIA
+-- RESTRICCIONES DE HERENCIA
 ALTER COLUMN EsTicketConsulta SET NOT NULL,
 ALTER COLUMN EsTicketMedicamento SET NOT NULL,
 ADD CONSTRAINT Ticket_chk_completitud CHECK (EsTicketConsulta = TRUE OR EsTicketMedicamento = TRUE);
