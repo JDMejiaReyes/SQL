@@ -1868,8 +1868,6 @@ CREATE TABLE Ticket(
     FechaPago DATE,
     HoraPago TIME,
     TipoVenta VARCHAR(20),
-    PrecioBruto NUMERIC(10,2) DEFAULT 0.00,
-    PrecioNeto NUMERIC(10,2) DEFAULT 0.00,
     IdSucursal INTEGER,
     IdCliente INTEGER,
     EsTicketConsulta BOOLEAN,
@@ -1896,12 +1894,6 @@ ALTER COLUMN HoraPago SET NOT NULL,
 ALTER COLUMN TipoVenta SET NOT NULL,
 
 ADD CONSTRAINT Ticket_d1 CHECK (TipoVenta IN ('Presencial', 'Web')),
-ALTER COLUMN PrecioBruto SET NOT NULL,
-
-ADD CONSTRAINT Ticket_d2 CHECK (PrecioBruto >= 0),
-ALTER COLUMN PrecioNeto SET NOT NULL,
-
-ADD CONSTRAINT Ticket_d3 CHECK (PrecioNeto >= 0),
 ALTER COLUMN IdCliente SET NOT NULL,
 ALTER COLUMN IdSucursal SET NOT NULL,
 
