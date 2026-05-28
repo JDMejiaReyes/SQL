@@ -1145,3 +1145,1045 @@ COMMENT ON COLUMN Horarios_Clinica.Cierre IS 'Hora de cierre.';
 COMMENT ON CONSTRAINT Horarios_Clinica_pk ON Horarios_Clinica IS 'Llave primaria compuesta (IdClinica y día).';
 COMMENT ON CONSTRAINT Horarios_Clinica_fk ON Horarios_Clinica IS 'Llave foránea: Vinculación con la clínica.';
 
+-- =================================================================
+--                             MÓDULO 2 
+-- =================================================================
+
+-- Tabla 1
+CREATE TABLE MedComercial (
+    IdMedicamento SERIAL,
+    NombreComercial VARCHAR(100),
+    FormaFarmaceutica VARCHAR(20),
+    Concentracion VARCHAR(20),
+    Presentacion VARCHAR(50),
+    ViaAdministracion VARCHAR(20),
+    Clasificacion VARCHAR (20),
+    TipoControl VARCHAR (20),
+    Descripcion TEXT,
+    NombreGenerico VARCHAR(50),
+    LabFabricante VARCHAR(50)
+);
+
+-- PK
+ALTER TABLE MedComercial ADD CONSTRAINT MedComercial_pk
+PRIMARY KEY (IdMedicamento);
+
+-- Restricciones
+ALTER TABLE MedComercial
+ALTER COLUMN NombreComercial SET NOT NULL,
+ALTER COLUMN FormaFarmaceutica SET NOT NULL,
+ALTER COLUMN Concentracion SET NOT NULL,
+ALTER COLUMN Presentacion SET NOT NULL,
+ALTER COLUMN ViaAdministracion SET NOT NULL,
+ALTER COLUMN Clasificacion SET NOT NULL,
+ALTER COLUMN TipoControl SET NOT NULL,
+ALTER COLUMN Descripcion SET NOT NULL,
+ALTER COLUMN NombreGenerico SET NOT NULL,
+ALTER COLUMN LabFabricante SET NOT NULL;
+
+-- =================================================================
+--                      BLOQUE DE COMENTARIOS 
+-- =================================================================
+COMMENT ON TABLE MedComercial IS 'Catálogo de medicamentos comerciales de patente.';
+
+-- Comentarios de Columnas
+COMMENT ON COLUMN MedComercial.IdMedicamento IS 'Identificador único del medicamento comercial.';
+COMMENT ON COLUMN MedComercial.NombreComercial IS 'Nombre comercial del producto.';
+COMMENT ON COLUMN MedComercial.FormaFarmaceutica IS 'Forma farmacéutica (ej. Tabletas, Jarabe).';
+COMMENT ON COLUMN MedComercial.Concentracion IS 'Concentración del principio activo.';
+COMMENT ON COLUMN MedComercial.Presentacion IS 'Presentación comercial (ej. Caja con 20 tabletas).';
+COMMENT ON COLUMN MedComercial.ViaAdministracion IS 'Vía de administración (ej. Oral, Intravenosa).';
+COMMENT ON COLUMN MedComercial.Clasificacion IS 'Clasificación terapéutica.';
+COMMENT ON COLUMN MedComercial.TipoControl IS 'Tipo de control (ej. Antibiótico, Psicotrópico).';
+COMMENT ON COLUMN MedComercial.Descripcion IS 'Descripción detallada del medicamento.';
+COMMENT ON COLUMN MedComercial.NombreGenerico IS 'Nombre genérico del medicamento.';
+COMMENT ON COLUMN MedComercial.LabFabricante IS 'Laboratorio fabricante.';
+
+-- Comentarios de Restricciones
+COMMENT ON CONSTRAINT MedComercial_pk ON MedComercial IS 'Llave primaria: Identificador único del medicamento comercial.';
+
+
+-- Tabla 2
+CREATE TABLE MedPreparado (
+    IdMedicamento SERIAL,
+    NombreComercial VARCHAR(50),
+    FormaFarmaceutica VARCHAR(20),
+    Concentracion VARCHAR(20),
+    Presentacion VARCHAR(50),
+    ViaAdministracion VARCHAR(20),
+    Clasificacion VARCHAR (20),
+    TipoControl VARCHAR (20),
+    Descripcion TEXT,
+    Categoria VARCHAR(50)
+);
+
+-- PK
+ALTER TABLE MedPreparado ADD CONSTRAINT MedPreparado_pk
+PRIMARY KEY (IdMedicamento);
+
+-- Restricciones
+ALTER TABLE MedPreparado
+ALTER COLUMN NombreComercial SET NOT NULL,
+ALTER COLUMN FormaFarmaceutica SET NOT NULL,
+ALTER COLUMN Concentracion SET NOT NULL,
+ALTER COLUMN Presentacion SET NOT NULL,
+ALTER COLUMN ViaAdministracion SET NOT NULL,
+ALTER COLUMN Clasificacion SET NOT NULL,
+ALTER COLUMN TipoControl SET NOT NULL,
+ALTER COLUMN Descripcion SET NOT NULL,
+ALTER COLUMN Categoria SET NOT NULL;
+
+-- =================================================================
+--                      BLOQUE DE COMENTARIOS 
+-- =================================================================
+COMMENT ON TABLE MedPreparado IS 'Catálogo de fórmulas magistrales preparadas en la farmacia.';
+
+-- Comentarios de Columnas
+COMMENT ON COLUMN MedPreparado.IdMedicamento IS 'Identificador único de la fórmula magistral.';
+COMMENT ON COLUMN MedPreparado.NombreComercial IS 'Nombre asignado a la preparación.';
+COMMENT ON COLUMN MedPreparado.FormaFarmaceutica IS 'Forma farmacéutica de la preparación.';
+COMMENT ON COLUMN MedPreparado.Concentracion IS 'Concentración de la mezcla preparada.';
+COMMENT ON COLUMN MedPreparado.Presentacion IS 'Presentación final del preparado.';
+COMMENT ON COLUMN MedPreparado.ViaAdministracion IS 'Vía de administración recomendada.';
+COMMENT ON COLUMN MedPreparado.Clasificacion IS 'Clasificación de la preparación.';
+COMMENT ON COLUMN MedPreparado.TipoControl IS 'Tipo de control sanitario.';
+COMMENT ON COLUMN MedPreparado.Descripcion IS 'Descripción de la fórmula y sus beneficios.';
+COMMENT ON COLUMN MedPreparado.Categoria IS 'Categoría de la fórmula magistral.';
+
+-- Comentarios de Restricciones
+COMMENT ON CONSTRAINT MedPreparado_pk ON MedPreparado IS 'Llave primaria: Identificador de la fórmula magistral.';
+
+
+-- Tabla 3
+CREATE TABLE Insumo (
+    IdInsumo SERIAL,
+    NombreCientifico VARCHAR(50),
+    NombreComercial VARCHAR(50),
+    Tipo VARCHAR(20),
+    FormaFisica VARCHAR(20),
+    Potencia VARCHAR(20),
+    Grado VARCHAR(20),
+    Riesgo VARCHAR(20),
+    EsEsteril BOOLEAN,
+    Temperatura VARCHAR(20),
+    Sensibilidad VARCHAR(20),
+    Observaciones TEXT
+);
+
+-- PK
+ALTER TABLE Insumo ADD CONSTRAINT Insumo_pk
+PRIMARY KEY (IdInsumo);
+
+-- Restricciones
+ALTER TABLE Insumo
+ALTER COLUMN NombreCientifico SET NOT NULL,
+ALTER COLUMN NombreComercial SET NOT NULL,
+ALTER COLUMN Tipo SET NOT NULL,
+ALTER COLUMN FormaFisica SET NOT NULL,
+ALTER COLUMN Potencia SET NOT NULL,
+ALTER COLUMN Grado SET NOT NULL,
+ALTER COLUMN Riesgo SET NOT NULL,
+ALTER COLUMN EsEsteril SET NOT NULL,
+ALTER COLUMN Temperatura SET NOT NULL,
+ALTER COLUMN Sensibilidad SET NOT NULL,
+ALTER COLUMN Observaciones SET NOT NULL;
+
+-- =================================================================
+--                      BLOQUE DE COMENTARIOS 
+-- =================================================================
+COMMENT ON TABLE Insumo IS 'Catálogo de materias primas e insumos necesarios para fórmulas magistrales.';
+
+-- Comentarios de Columnas
+COMMENT ON COLUMN Insumo.IdInsumo IS 'Identificador único del insumo.';
+COMMENT ON COLUMN Insumo.NombreCientifico IS 'Nombre científico de la materia prima.';
+COMMENT ON COLUMN Insumo.NombreComercial IS 'Nombre comercial del insumo.';
+COMMENT ON COLUMN Insumo.Tipo IS 'Tipo de insumo (ej. Activo, Excipiente).';
+COMMENT ON COLUMN Insumo.FormaFisica IS 'Forma física (ej. Polvo, Líquido).';
+COMMENT ON COLUMN Insumo.Potencia IS 'Potencia o pureza del insumo.';
+COMMENT ON COLUMN Insumo.Grado IS 'Grado de calidad (ej. Farmacéutico).';
+COMMENT ON COLUMN Insumo.Riesgo IS 'Nivel de riesgo en manejo.';
+COMMENT ON COLUMN Insumo.EsEsteril IS 'Indica si el insumo es estéril.';
+COMMENT ON COLUMN Insumo.Temperatura IS 'Temperatura de almacenamiento requerida.';
+COMMENT ON COLUMN Insumo.Sensibilidad IS 'Sensibilidad a factores externos (ej. Luz, Humedad).';
+COMMENT ON COLUMN Insumo.Observaciones IS 'Observaciones adicionales de manejo.';
+
+-- Comentarios de Restricciones
+COMMENT ON CONSTRAINT Insumo_pk ON Insumo IS 'Llave primaria: Identificador del insumo o materia prima.';
+
+
+-- Tabla 4
+CREATE TABLE Elaborar (
+    RFC VARCHAR(13),
+    IdMedicamento INTEGER,
+    FechaElaboracion TIMESTAMP,
+    CantidadElaborada INTEGER
+);
+
+-- NOTA: No se define PK porque fue eliminada en corrección (Elaborar_pk)
+
+-- FK
+ALTER TABLE Elaborar ADD CONSTRAINT Elaborar_fk1
+FOREIGN KEY (RFC) REFERENCES Farmaceutico(RFC)
+ON UPDATE CASCADE ON DELETE RESTRICT;
+
+ALTER TABLE Elaborar ADD CONSTRAINT Elaborar_fk2
+FOREIGN KEY (IdMedicamento) REFERENCES MedPreparado(IdMedicamento)
+ON UPDATE CASCADE ON DELETE RESTRICT;
+
+-- Restricciones
+ALTER TABLE Elaborar
+ALTER COLUMN FechaElaboracion SET NOT NULL,
+ALTER COLUMN CantidadElaborada SET NOT NULL,
+ADD CONSTRAINT Elaborar_d1 CHECK (CantidadElaborada > 0);
+
+-- =================================================================
+--                      BLOQUE DE COMENTARIOS 
+-- =================================================================
+COMMENT ON TABLE Elaborar IS 'Relación que registra la fabricación física de lotes de medicamentos preparados.';
+
+-- Comentarios de Columnas
+COMMENT ON COLUMN Elaborar.RFC IS 'RFC del farmacéutico que elaboró el medicamento.';
+COMMENT ON COLUMN Elaborar.IdMedicamento IS 'Identificador del medicamento preparado.';
+COMMENT ON COLUMN Elaborar.FechaElaboracion IS 'Fecha y hora de elaboración.';
+COMMENT ON COLUMN Elaborar.CantidadElaborada IS 'Cantidad total de unidades producidas.';
+
+-- Comentarios de Restricciones
+COMMENT ON CONSTRAINT Elaborar_fk1 ON Elaborar IS 'Llave foránea: Farmacéutico responsable de la elaboración.';
+COMMENT ON CONSTRAINT Elaborar_fk2 ON Elaborar IS 'Llave foránea: Fórmula magistral elaborada.';
+COMMENT ON CONSTRAINT Elaborar_d1 ON Elaborar IS 'Validación: La cantidad elaborada debe ser mayor a cero.';
+
+
+-- Tabla 5
+CREATE TABLE Contener (
+    IdMedicamento INTEGER,
+    IdInsumo INTEGER,
+    CantidadRequerida NUMERIC(10, 4)
+);
+
+-- NOTA: No se define PK porque fue eliminada en corrección (Contener_pk)
+
+-- FK
+ALTER TABLE Contener ADD CONSTRAINT Contener_fk1
+FOREIGN KEY (IdMedicamento) REFERENCES MedPreparado(IdMedicamento)
+ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE Contener ADD CONSTRAINT Contener_fk2
+FOREIGN KEY (IdInsumo) REFERENCES Insumo(IdInsumo)
+ON UPDATE CASCADE ON DELETE RESTRICT;
+
+-- Restricciones
+ALTER TABLE Contener
+ALTER COLUMN CantidadRequerida SET NOT NULL,
+ADD CONSTRAINT Contener_d1 CHECK (CantidadRequerida > 0);
+
+-- =================================================================
+--                      BLOQUE DE COMENTARIOS 
+-- =================================================================
+COMMENT ON TABLE Contener IS 'Relación que define la composición o receta de las fórmulas magistrales.';
+
+-- Comentarios de Columnas
+COMMENT ON COLUMN Contener.IdMedicamento IS 'Identificador del medicamento preparado.';
+COMMENT ON COLUMN Contener.IdInsumo IS 'Identificador del insumo contenido.';
+COMMENT ON COLUMN Contener.CantidadRequerida IS 'Cantidad necesaria del insumo para la fórmula.';
+
+-- Comentarios de Restricciones
+COMMENT ON CONSTRAINT Contener_fk1 ON Contener IS 'Llave foránea: Fórmula magistral a la que pertenecen los insumos.';
+COMMENT ON CONSTRAINT Contener_fk2 ON Contener IS 'Llave foránea: Insumo requerido para la preparación.';
+COMMENT ON CONSTRAINT Contener_d1 ON Contener IS 'Validación: La cantidad requerida del insumo debe ser positiva.';
+
+-- =================================================================
+--                             MÓDULO 3 
+-- =================================================================
+
+-- Tabla 1
+CREATE TABLE Proveedor (
+    IdProveedor SERIAL,
+    RazonSocial VARCHAR(50),
+    Calle VARCHAR(50), 
+    NumeroExterior INTEGER, 
+    NumeroInterior INTEGER,
+    Colonia VARCHAR(50),
+    Estado VARCHAR(50)
+);
+
+-- PK
+ALTER TABLE Proveedor ADD CONSTRAINT Proveedor_pk
+PRIMARY KEY (IdProveedor);
+
+-- Restricciones
+ALTER TABLE Proveedor
+ALTER COLUMN RazonSocial SET NOT NULL,
+ALTER COLUMN Calle SET NOT NULL,
+ALTER COLUMN NumeroExterior SET NOT NULL,
+ADD CONSTRAINT Proveedor_d1 CHECK (NumeroExterior > 0),
+ALTER COLUMN Colonia SET NOT NULL,
+ALTER COLUMN Estado SET NOT NULL,
+ADD CONSTRAINT Proveedor_d2 CHECK (NumeroInterior IS NULL OR NumeroInterior > 0);
+
+-- =================================================================
+--                      BLOQUE DE COMENTARIOS 
+-- =================================================================
+COMMENT ON TABLE Proveedor IS 'Catálogo de proveedores de medicamentos (comerciales) e insumos.';
+
+-- Comentarios de Columnas
+COMMENT ON COLUMN Proveedor.IdProveedor IS 'Identificador único del proveedor.';
+COMMENT ON COLUMN Proveedor.RazonSocial IS 'Razón social de la empresa proveedora.';
+COMMENT ON COLUMN Proveedor.Calle IS 'Calle del domicilio fiscal.';
+COMMENT ON COLUMN Proveedor.NumeroExterior IS 'Número exterior del domicilio.';
+COMMENT ON COLUMN Proveedor.NumeroInterior IS 'Número interior del domicilio.';
+COMMENT ON COLUMN Proveedor.Colonia IS 'Colonia del domicilio.';
+COMMENT ON COLUMN Proveedor.Estado IS 'Estado donde se ubica.';
+
+-- Comentarios de Restricciones
+COMMENT ON CONSTRAINT Proveedor_pk ON Proveedor IS 'Llave primaria: Identificador único del proveedor.';
+COMMENT ON CONSTRAINT Proveedor_d1 ON Proveedor IS 'Validación: El número exterior debe ser positivo.';
+COMMENT ON CONSTRAINT Proveedor_d2 ON Proveedor IS 'Validación: El número interior debe ser positivo si existe.';
+
+
+-- Tabla 2
+CREATE TABLE Telefonos_Proveedor (
+    IdProveedor INTEGER,
+    Telefono VARCHAR(15)
+);
+
+-- PK
+ALTER TABLE Telefonos_Proveedor ADD CONSTRAINT Telefonos_Proveedor_pk 
+PRIMARY KEY (IdProveedor, Telefono);
+
+-- FK
+ALTER TABLE Telefonos_Proveedor ADD CONSTRAINT Telefonos_Proveedor_fk 
+FOREIGN KEY (IdProveedor) REFERENCES Proveedor(IdProveedor)
+ON UPDATE CASCADE ON DELETE CASCADE;
+
+-- Restricciones
+ALTER TABLE Telefonos_Proveedor
+ADD CONSTRAINT Telefonos_Proveedor_v CHECK (Telefono ~ '^(\+[0-9]{1,3})?[0-9]{10}$');
+
+-- =================================================================
+--                      BLOQUE DE COMENTARIOS 
+-- =================================================================
+COMMENT ON TABLE Telefonos_Proveedor IS 'Atributo multivaluado que almacena los teléfonos de los proveedores.';
+
+-- Comentarios de Columnas
+COMMENT ON COLUMN Telefonos_Proveedor.IdProveedor IS 'Identificador del proveedor.';
+COMMENT ON COLUMN Telefonos_Proveedor.Telefono IS 'Número telefónico de contacto.';
+
+-- Comentarios de Restricciones
+COMMENT ON CONSTRAINT Telefonos_Proveedor_pk ON Telefonos_Proveedor IS 'Llave primaria compuesta (IdProveedor y teléfono).';
+COMMENT ON CONSTRAINT Telefonos_Proveedor_fk ON Telefonos_Proveedor IS 'Llave foránea: Relación con la tabla Proveedor.';
+COMMENT ON CONSTRAINT Telefonos_Proveedor_v ON Telefonos_Proveedor IS 'Validación: Formato de número telefónico (10 dígitos, opcionalmente con código de país).';
+
+
+-- Tabla 3
+CREATE TABLE EntregarMedComercial (
+    IdProveedor INTEGER,
+    IdSucursal INTEGER,
+    IdMedicamento INTEGER,
+    FechaRecepcion TIMESTAMP,
+    FechaCaducidad DATE,
+    CondicionesAlmacenamiento VARCHAR(100),
+    CantidadRecibida INTEGER,
+    PrecioPublico NUMERIC(6, 2),
+    PrecioUnitario NUMERIC(6, 2)
+);
+
+-- NOTA: No se define PK porque fue eliminada en corrección (EntregarMedComercial_pk)
+
+-- FK
+ALTER TABLE EntregarMedComercial ADD CONSTRAINT EntregarMedComercial_fk1 
+FOREIGN KEY (IdProveedor) REFERENCES Proveedor(IdProveedor)
+ON UPDATE CASCADE ON DELETE RESTRICT;
+
+ALTER TABLE EntregarMedComercial ADD CONSTRAINT EntregarMedComercial_fk2 
+FOREIGN KEY (IdSucursal) REFERENCES Sucursal(IdSucursal)
+ON UPDATE CASCADE ON DELETE RESTRICT;
+
+ALTER TABLE EntregarMedComercial ADD CONSTRAINT EntregarMedComercial_fk3 
+FOREIGN KEY (IdMedicamento) REFERENCES MedComercial(IdMedicamento)
+ON UPDATE CASCADE ON DELETE RESTRICT;
+
+-- Restricciones
+ALTER TABLE EntregarMedComercial
+ALTER COLUMN FechaRecepcion SET NOT NULL,
+ALTER COLUMN FechaCaducidad SET NOT NULL,
+ALTER COLUMN CondicionesAlmacenamiento SET NOT NULL,
+ALTER COLUMN CantidadRecibida SET NOT NULL,
+ADD CONSTRAINT EntregarMedComercial_d1 CHECK (CantidadRecibida > 0),
+ALTER COLUMN PrecioPublico SET NOT NULL,
+ADD CONSTRAINT EntregarMedComercial_d2 CHECK (PrecioPublico >= 0),
+ALTER COLUMN PrecioUnitario SET NOT NULL,
+ADD CONSTRAINT EntregarMedComercial_d3 CHECK (PrecioUnitario >= 0);
+
+-- =================================================================
+--                      BLOQUE DE COMENTARIOS 
+-- =================================================================
+COMMENT ON TABLE EntregarMedComercial IS 'Relación transaccional que registra la recepción de medicamentos comerciales.';
+
+-- Comentarios de Columnas
+COMMENT ON COLUMN EntregarMedComercial.IdProveedor IS 'Identificador del proveedor que entrega.';
+COMMENT ON COLUMN EntregarMedComercial.IdSucursal IS 'Identificador de la sucursal que recibe.';
+COMMENT ON COLUMN EntregarMedComercial.IdMedicamento IS 'Identificador del medicamento comercial.';
+COMMENT ON COLUMN EntregarMedComercial.FechaRecepcion IS 'Fecha y hora de recepción del lote.';
+COMMENT ON COLUMN EntregarMedComercial.FechaCaducidad IS 'Fecha de caducidad del lote recibido.';
+COMMENT ON COLUMN EntregarMedComercial.CondicionesAlmacenamiento IS 'Condiciones específicas para el almacenaje.';
+COMMENT ON COLUMN EntregarMedComercial.CantidadRecibida IS 'Número de unidades recibidas.';
+COMMENT ON COLUMN EntregarMedComercial.PrecioPublico IS 'Precio sugerido de venta al público.';
+COMMENT ON COLUMN EntregarMedComercial.PrecioUnitario IS 'Costo unitario de adquisición.';
+
+-- Comentarios de Restricciones
+COMMENT ON CONSTRAINT EntregarMedComercial_fk1 ON EntregarMedComercial IS 'Llave foránea: Proveedor que realiza la entrega.';
+COMMENT ON CONSTRAINT EntregarMedComercial_fk2 ON EntregarMedComercial IS 'Llave foránea: Sucursal que recibe el medicamento.';
+COMMENT ON CONSTRAINT EntregarMedComercial_fk3 ON EntregarMedComercial IS 'Llave foránea: Medicamento comercial recibido.';
+COMMENT ON CONSTRAINT EntregarMedComercial_d1 ON EntregarMedComercial IS 'Validación: La cantidad recibida debe ser mayor a cero.';
+COMMENT ON CONSTRAINT EntregarMedComercial_d2 ON EntregarMedComercial IS 'Validación: El precio público debe ser igual o mayor a cero.';
+COMMENT ON CONSTRAINT EntregarMedComercial_d3 ON EntregarMedComercial IS 'Validación: El precio unitario debe ser igual o mayor a cero.';
+
+
+-- Tabla 4
+CREATE TABLE EntregarInsumo (
+    IdProveedor INTEGER,
+    IdSucursal INTEGER,
+    IdInsumo INTEGER,
+    FechaRecepcion TIMESTAMP,
+    FechaCaducidad DATE,
+    CondicionesAlmacenamiento VARCHAR(100),
+    CantidadRecibida INTEGER,
+    PrecioPublico NUMERIC(6, 2),
+    PrecioUnitario NUMERIC(6, 2)
+);
+
+-- NOTA: No se define PK porque fue eliminada en corrección (EntregarInsumo_pk)
+
+-- FK
+ALTER TABLE EntregarInsumo ADD CONSTRAINT EntregarInsumo_fk1 
+FOREIGN KEY (IdProveedor) REFERENCES Proveedor(IdProveedor)
+ON UPDATE CASCADE ON DELETE RESTRICT;
+
+ALTER TABLE EntregarInsumo ADD CONSTRAINT EntregarInsumo_fk2 
+FOREIGN KEY (IdSucursal) REFERENCES Sucursal(IdSucursal)
+ON UPDATE CASCADE ON DELETE RESTRICT;
+
+ALTER TABLE EntregarInsumo ADD CONSTRAINT EntregarInsumo_fk3 
+FOREIGN KEY (IdInsumo) REFERENCES Insumo(IdInsumo)
+ON UPDATE CASCADE ON DELETE RESTRICT;
+
+-- Restricciones
+ALTER TABLE EntregarInsumo
+ALTER COLUMN FechaRecepcion SET NOT NULL,
+ALTER COLUMN FechaCaducidad SET NOT NULL,
+ALTER COLUMN CondicionesAlmacenamiento SET NOT NULL,
+ALTER COLUMN CantidadRecibida SET NOT NULL,
+ADD CONSTRAINT EntregarInsumo_d1 CHECK (CantidadRecibida > 0),
+ALTER COLUMN PrecioPublico SET NOT NULL,
+ADD CONSTRAINT EntregarInsumo_d2 CHECK (PrecioPublico >= 0),
+ALTER COLUMN PrecioUnitario SET NOT NULL,
+ADD CONSTRAINT EntregarInsumo_d3 CHECK (PrecioUnitario >= 0);
+
+-- =================================================================
+--                      BLOQUE DE COMENTARIOS 
+-- =================================================================
+COMMENT ON TABLE EntregarInsumo IS 'Relación transaccional que registra la recepción de insumos o materias primas.';
+
+-- Comentarios de Columnas
+COMMENT ON COLUMN EntregarInsumo.IdProveedor IS 'Identificador del proveedor que entrega.';
+COMMENT ON COLUMN EntregarInsumo.IdSucursal IS 'Identificador de la sucursal que recibe.';
+COMMENT ON COLUMN EntregarInsumo.IdInsumo IS 'Identificador del insumo recibido.';
+COMMENT ON COLUMN EntregarInsumo.FechaRecepcion IS 'Fecha y hora de recepción.';
+COMMENT ON COLUMN EntregarInsumo.FechaCaducidad IS 'Fecha de caducidad del insumo.';
+COMMENT ON COLUMN EntregarInsumo.CondicionesAlmacenamiento IS 'Condiciones requeridas para su conservación.';
+COMMENT ON COLUMN EntregarInsumo.CantidadRecibida IS 'Cantidad total de unidades o volumen recibido.';
+COMMENT ON COLUMN EntregarInsumo.PrecioPublico IS 'Precio de venta al público (si aplica).';
+COMMENT ON COLUMN EntregarInsumo.PrecioUnitario IS 'Costo unitario del insumo.';
+
+-- Comentarios de Restricciones
+COMMENT ON CONSTRAINT EntregarInsumo_fk1 ON EntregarInsumo IS 'Llave foránea: Proveedor que suministra el insumo.';
+COMMENT ON CONSTRAINT EntregarInsumo_fk2 ON EntregarInsumo IS 'Llave foránea: Sucursal receptora.';
+COMMENT ON CONSTRAINT EntregarInsumo_fk3 ON EntregarInsumo IS 'Llave foránea: Insumo o materia prima recibida.';
+COMMENT ON CONSTRAINT EntregarInsumo_d1 ON EntregarInsumo IS 'Validación: La cantidad de insumo recibida debe ser positiva.';
+COMMENT ON CONSTRAINT EntregarInsumo_d2 ON EntregarInsumo IS 'Validación: El precio público debe ser igual o mayor a cero.';
+COMMENT ON CONSTRAINT EntregarInsumo_d3 ON EntregarInsumo IS 'Validación: El precio unitario debe ser igual o mayor a cero.';
+
+-- =================================================================
+--                             MÓDULO 5 
+-- =================================================================
+
+-- Tabla 1
+CREATE TABLE Cliente(
+    IdCliente SERIAL,
+    Nombre VARCHAR(50),
+    Paterno VARCHAR(50),
+    Materno VARCHAR(50),
+    FechaNacimiento DATE,
+    Calle VARCHAR(50),
+    NumeroExterior INTEGER,
+    NumeroInterior INTEGER,
+    Colonia VARCHAR(50),
+    Estado VARCHAR(50),
+    MetodoPago VARCHAR(20)
+);
+
+-- PK
+ALTER TABLE Cliente ADD CONSTRAINT Cliente_pk
+PRIMARY KEY (IdCliente);
+
+-- Restricciones
+ALTER TABLE Cliente
+ALTER COLUMN Nombre SET NOT NULL,
+ALTER COLUMN Paterno SET NOT NULL,
+ALTER COLUMN Materno SET NOT NULL,
+ALTER COLUMN FechaNacimiento SET NOT NULL,
+ADD CONSTRAINT Cliente_d1 CHECK (FechaNacimiento <= CURRENT_DATE),
+ALTER COLUMN Calle SET NOT NULL,
+ALTER COLUMN NumeroExterior SET NOT NULL,
+ADD CONSTRAINT Cliente_d2 CHECK (NumeroExterior > 0),
+ALTER COLUMN Colonia SET NOT NULL,
+ALTER COLUMN Estado SET NOT NULL,
+ALTER COLUMN MetodoPago SET NOT NULL,
+ADD CONSTRAINT Cliente_d3 CHECK (MetodoPago IN ('Tarjeta', 'Efectivo')),
+ADD CONSTRAINT Cliente_d4 CHECK (NumeroInterior IS NULL OR NumeroInterior > 0);
+
+-- =================================================================
+--                      BLOQUE DE COMENTARIOS 
+-- =================================================================
+COMMENT ON TABLE Cliente IS 'Catálogo general de clientes de la farmacia.';
+
+-- Comentarios de Columnas
+COMMENT ON COLUMN Cliente.IdCliente IS 'Identificador único del cliente.';
+COMMENT ON COLUMN Cliente.Nombre IS 'Nombre(s) del cliente.';
+COMMENT ON COLUMN Cliente.Paterno IS 'Apellido paterno del cliente.';
+COMMENT ON COLUMN Cliente.Materno IS 'Apellido materno del cliente.';
+COMMENT ON COLUMN Cliente.FechaNacimiento IS 'Fecha de nacimiento del cliente.';
+COMMENT ON COLUMN Cliente.Calle IS 'Calle del domicilio del cliente.';
+COMMENT ON COLUMN Cliente.NumeroExterior IS 'Número exterior del domicilio.';
+COMMENT ON COLUMN Cliente.NumeroInterior IS 'Número interior del domicilio.';
+COMMENT ON COLUMN Cliente.Colonia IS 'Colonia del domicilio.';
+COMMENT ON COLUMN Cliente.Estado IS 'Estado del domicilio.';
+COMMENT ON COLUMN Cliente.MetodoPago IS 'Método de pago preferido.';
+
+-- Comentarios de Restricciones
+COMMENT ON CONSTRAINT Cliente_pk ON Cliente IS 'Llave primaria: Identificador único del cliente.';
+COMMENT ON CONSTRAINT Cliente_d1 ON Cliente IS 'Validación: La fecha de nacimiento no puede ser futura.';
+COMMENT ON CONSTRAINT Cliente_d2 ON Cliente IS 'Validación: El número exterior debe ser positivo.';
+COMMENT ON CONSTRAINT Cliente_d3 ON Cliente IS 'Validación: Restringe los métodos de pago a Tarjeta o Efectivo.';
+COMMENT ON CONSTRAINT Cliente_d4 ON Cliente IS 'Validación: El número interior debe ser positivo si se proporciona.';
+
+
+-- Tabla 2
+CREATE TABLE ClienteOnline(
+    IdCliente INTEGER,
+    NombreUsuario VARCHAR(20),
+    Contraseña VARCHAR(255),
+    NumeroTarjeta VARCHAR(20),
+    FechaVencimiento VARCHAR(5)
+);
+
+-- PK
+ALTER TABLE ClienteOnline ADD CONSTRAINT ClienteOnline_pk
+PRIMARY KEY (IdCliente);
+
+-- FK
+ALTER TABLE ClienteOnline ADD CONSTRAINT ClienteOnline_fk
+FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente)
+ON UPDATE CASCADE ON DELETE CASCADE;
+
+-- Restricciones
+ALTER TABLE ClienteOnline
+ALTER COLUMN NombreUsuario SET NOT NULL,
+ADD CONSTRAINT Clienteonline_u1 UNIQUE (NombreUsuario),
+ALTER COLUMN Contraseña SET NOT NULL,
+ALTER COLUMN NumeroTarjeta SET NOT NULL,
+ALTER COLUMN FechaVencimiento SET NOT NULL;
+
+-- =================================================================
+--                      BLOQUE DE COMENTARIOS 
+-- =================================================================
+COMMENT ON TABLE ClienteOnline IS 'Extensión de la tabla Cliente para usuarios con cuenta en línea.';
+
+-- Comentarios de Columnas
+COMMENT ON COLUMN ClienteOnline.IdCliente IS 'Identificador del cliente vinculado.';
+COMMENT ON COLUMN ClienteOnline.NombreUsuario IS 'Nombre de usuario para acceso al sistema.';
+COMMENT ON COLUMN ClienteOnline.Contraseña IS 'Contraseña encriptada de la cuenta.';
+COMMENT ON COLUMN ClienteOnline.NumeroTarjeta IS 'Número de tarjeta de crédito/débito guardada.';
+COMMENT ON COLUMN ClienteOnline.FechaVencimiento IS 'Fecha de vencimiento de la tarjeta.';
+
+-- Comentarios de Restricciones
+COMMENT ON CONSTRAINT ClienteOnline_pk ON ClienteOnline IS 'Llave primaria: Identificador del cliente (Relación 1:1 con Cliente).';
+COMMENT ON CONSTRAINT ClienteOnline_fk ON ClienteOnline IS 'Llave foránea: Vinculación obligatoria con la entidad base Cliente.';
+COMMENT ON CONSTRAINT Clienteonline_u1 ON ClienteOnline IS 'Restricción: El nombre de usuario debe ser único en el sistema.';
+
+
+-- Tabla 3
+CREATE TABLE Ticket(
+    FolioTicket SERIAL,
+    FechaPago DATE,
+    HoraPago TIME,
+    TipoVenta VARCHAR(20),
+    IdSucursal INTEGER,
+    IdCliente INTEGER,
+    EsTicketConsulta BOOLEAN,
+    EsTicketMedicamento BOOLEAN
+);
+
+-- PK
+ALTER TABLE Ticket ADD CONSTRAINT Ticket_pk
+PRIMARY KEY (FolioTicket);
+
+-- FK
+ALTER TABLE Ticket ADD CONSTRAINT Ticket_fk1
+FOREIGN KEY (IdSucursal) REFERENCES Sucursal(IdSucursal)
+ON UPDATE CASCADE ON DELETE RESTRICT;
+
+ALTER TABLE Ticket ADD CONSTRAINT Ticket_fk2
+FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente)
+ON UPDATE CASCADE ON DELETE RESTRICT;
+
+-- Restricciones
+ALTER TABLE Ticket
+ALTER COLUMN FechaPago SET NOT NULL,
+ALTER COLUMN HoraPago SET NOT NULL,
+ALTER COLUMN TipoVenta SET NOT NULL,
+ADD CONSTRAINT Ticket_d1 CHECK (TipoVenta IN ('Presencial', 'Web')),
+ALTER COLUMN IdCliente SET NOT NULL,
+ALTER COLUMN IdSucursal SET NOT NULL,
+
+-- NUEVAS RESTRICCIONES DE HERENCIA
+ALTER COLUMN EsTicketConsulta SET NOT NULL,
+ALTER COLUMN EsTicketMedicamento SET NOT NULL,
+ADD CONSTRAINT Ticket_chk_completitud CHECK (EsTicketConsulta = TRUE OR EsTicketMedicamento = TRUE);
+
+-- =================================================================
+--                      BLOQUE DE COMENTARIOS 
+-- =================================================================
+COMMENT ON TABLE Ticket IS 'Registro de transacciones de venta (tickets de compra).';
+
+-- Comentarios de Columnas
+COMMENT ON COLUMN Ticket.FolioTicket IS 'Folio único autoincremental del ticket.';
+COMMENT ON COLUMN Ticket.FechaPago IS 'Fecha en que se realizó el pago.';
+COMMENT ON COLUMN Ticket.HoraPago IS 'Hora en que se registró el pago.';
+COMMENT ON COLUMN Ticket.TipoVenta IS 'Canal de venta (Presencial o Web).';
+COMMENT ON COLUMN Ticket.IdSucursal IS 'Sucursal donde se generó el ticket.';
+COMMENT ON COLUMN Ticket.IdCliente IS 'Cliente que realizó la compra.';
+COMMENT ON COLUMN Ticket.EsTicketConsulta IS 'Bandera booleana (Herencia): Indica si el ticket cobra un servicio clínico.';
+COMMENT ON COLUMN Ticket.EsTicketMedicamento IS 'Bandera booleana (Herencia): Indica si el ticket incluye productos del catálogo.';
+
+-- Comentarios de Restricciones
+COMMENT ON CONSTRAINT Ticket_pk ON Ticket IS 'Llave primaria: Folio único del ticket.';
+COMMENT ON CONSTRAINT Ticket_fk1 ON Ticket IS 'Llave foránea: Sucursal donde se realizó la venta.';
+COMMENT ON CONSTRAINT Ticket_fk2 ON Ticket IS 'Llave foránea: Cliente que realizó la compra.';
+COMMENT ON CONSTRAINT Ticket_d1 ON Ticket IS 'Validación: Restringe el tipo de venta a Presencial o Web.';
+COMMENT ON CONSTRAINT Ticket_chk_completitud ON Ticket IS 'Integridad de completitud total: Un ticket no puede guardarse si ambas banderas son falsas.';
+
+
+-- Tabla 4
+CREATE TABLE Telefonos_Cliente (
+    IdCliente INTEGER,
+    Telefono VARCHAR(15)
+);
+
+-- PK
+ALTER TABLE Telefonos_Cliente ADD CONSTRAINT Telefonos_Cliente_pk
+PRIMARY KEY (IdCliente, Telefono);
+
+-- FK
+ALTER TABLE Telefonos_Cliente ADD CONSTRAINT Telefonos_Cliente_fk
+FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente)
+ON UPDATE CASCADE ON DELETE CASCADE;
+
+-- Restricciones
+ALTER TABLE Telefonos_Cliente
+ADD CONSTRAINT Telefonos_Cliente_v CHECK (Telefono ~ '^(\+[0-9]{1,3})?[0-9]{10}$');
+
+-- =================================================================
+--                      BLOQUE DE COMENTARIOS 
+-- =================================================================
+COMMENT ON TABLE Telefonos_Cliente IS 'Atributo multivaluado: Teléfonos de contacto de los clientes.';
+
+-- Comentarios de Columnas
+COMMENT ON COLUMN Telefonos_Cliente.IdCliente IS 'Identificador del cliente.';
+COMMENT ON COLUMN Telefonos_Cliente.Telefono IS 'Número telefónico de contacto.';
+
+-- Comentarios de Restricciones
+COMMENT ON CONSTRAINT Telefonos_Cliente_pk ON Telefonos_Cliente IS 'Llave primaria compuesta (IdCliente y teléfono).';
+COMMENT ON CONSTRAINT Telefonos_Cliente_fk ON Telefonos_Cliente IS 'Llave foránea: Vinculación con la tabla Cliente.';
+COMMENT ON CONSTRAINT Telefonos_Cliente_v ON Telefonos_Cliente IS 'Validación: Formato de número telefónico (10 dígitos, opcionalmente con código de país).';
+
+
+-- Tabla 5
+CREATE TABLE Correos_Cliente (
+    IdCliente INTEGER,
+    Correo VARCHAR(50)
+);
+
+-- PK
+ALTER TABLE Correos_Cliente ADD CONSTRAINT Correos_Cliente_pk
+PRIMARY KEY (IdCliente, Correo);
+
+-- FK
+ALTER TABLE Correos_Cliente ADD CONSTRAINT Correos_Cliente_fk
+FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente)
+ON UPDATE CASCADE ON DELETE CASCADE;
+
+-- Restricciones
+ALTER TABLE Correos_Cliente
+ADD CONSTRAINT Correos_Cliente_v CHECK (Correo ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$');
+
+-- =================================================================
+--                      BLOQUE DE COMENTARIOS 
+-- =================================================================
+COMMENT ON TABLE Correos_Cliente IS 'Atributo multivaluado: Correos electrónicos de los clientes.';
+
+-- Comentarios de Columnas
+COMMENT ON COLUMN Correos_Cliente.IdCliente IS 'Identificador del cliente.';
+COMMENT ON COLUMN Correos_Cliente.Correo IS 'Dirección de correo electrónico.';
+
+-- Comentarios de Restricciones
+COMMENT ON CONSTRAINT Correos_Cliente_pk ON Correos_Cliente IS 'Llave primaria compuesta (IdCliente y correo).';
+COMMENT ON CONSTRAINT Correos_Cliente_fk ON Correos_Cliente IS 'Llave foránea: Vinculación con la tabla Cliente.';
+COMMENT ON CONSTRAINT Correos_Cliente_v ON Correos_Cliente IS 'Validación: Formato de correo electrónico.';
+
+
+-- Tabla 6
+CREATE TABLE TenerMedComercial(
+    FolioTicket INTEGER,
+    IdMedicamento INTEGER,
+    CantidadComprada INTEGER,
+    PrecioUnitario NUMERIC(6,2)
+);
+
+-- NOTA: No se define PK porque fue eliminada en corrección (TenerMedComercial_pk)
+
+-- FK
+ALTER TABLE TenerMedComercial ADD CONSTRAINT TenerMedComercial_fk1
+FOREIGN KEY (FolioTicket) REFERENCES Ticket(FolioTicket)
+ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE TenerMedComercial ADD CONSTRAINT TenerMedComercial_fk2
+FOREIGN KEY (IdMedicamento) REFERENCES MedComercial(IdMedicamento)
+ON UPDATE CASCADE ON DELETE RESTRICT;
+
+-- Restricciones
+ALTER TABLE TenerMedComercial
+ALTER COLUMN CantidadComprada SET NOT NULL,
+ADD CONSTRAINT TenerMedComercial_d1 CHECK (CantidadComprada > 0),
+ALTER COLUMN PrecioUnitario SET NOT NULL,
+ADD CONSTRAINT TenerMedComercial_d2 CHECK (PrecioUnitario >= 0);
+
+-- =================================================================
+--                      BLOQUE DE COMENTARIOS 
+-- =================================================================
+COMMENT ON TABLE TenerMedComercial IS 'Detalle de los medicamentos comerciales incluidos en un ticket.';
+
+-- Comentarios de Columnas
+COMMENT ON COLUMN TenerMedComercial.FolioTicket IS 'Folio del ticket asociado.';
+COMMENT ON COLUMN TenerMedComercial.IdMedicamento IS 'Identificador del medicamento comercial.';
+COMMENT ON COLUMN TenerMedComercial.CantidadComprada IS 'Cantidad de unidades adquiridas.';
+COMMENT ON COLUMN TenerMedComercial.PrecioUnitario IS 'Precio unitario al momento de la venta.';
+
+-- Comentarios de Restricciones
+COMMENT ON CONSTRAINT TenerMedComercial_fk1 ON TenerMedComercial IS 'Llave foránea: Ticket al que pertenece el detalle.';
+COMMENT ON CONSTRAINT TenerMedComercial_fk2 ON TenerMedComercial IS 'Llave foránea: Medicamento comercial vendido.';
+COMMENT ON CONSTRAINT TenerMedComercial_d1 ON TenerMedComercial IS 'Validación: La cantidad comprada debe ser mayor a cero.';
+COMMENT ON CONSTRAINT TenerMedComercial_d2 ON TenerMedComercial IS 'Validación: El precio unitario no puede ser negativo.';
+
+
+-- Tabla 7
+CREATE TABLE TenerMedPreparado(
+    FolioTicket INTEGER,
+    IdMedicamento INTEGER,
+    CantidadComprada INTEGER,
+    PrecioUnitario NUMERIC(6,2)
+);
+
+-- NOTA: No se define PK porque fue eliminada en corrección (TenerMedPreparado_pk)
+
+-- FK
+ALTER TABLE TenerMedPreparado ADD CONSTRAINT TenerMedPreparado_fk1
+FOREIGN KEY (FolioTicket) REFERENCES Ticket(FolioTicket)
+ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE TenerMedPreparado ADD CONSTRAINT TenerMedPreparado_fk2
+FOREIGN KEY (IdMedicamento) REFERENCES MedPreparado(IdMedicamento)
+ON UPDATE CASCADE ON DELETE RESTRICT;
+
+-- Restricciones
+ALTER TABLE TenerMedPreparado
+ALTER COLUMN CantidadComprada SET NOT NULL,
+ADD CONSTRAINT TenerMedPreparado_d1 CHECK (CantidadComprada > 0),
+ALTER COLUMN PrecioUnitario SET NOT NULL,
+ADD CONSTRAINT TenerMedPreparado_d2 CHECK (PrecioUnitario >= 0);
+
+-- =================================================================
+--                      BLOQUE DE COMENTARIOS 
+-- =================================================================
+COMMENT ON TABLE TenerMedPreparado IS 'Detalle de los medicamentos preparados incluidos en un ticket.';
+
+-- Comentarios de Columnas
+COMMENT ON COLUMN TenerMedPreparado.FolioTicket IS 'Folio del ticket asociado.';
+COMMENT ON COLUMN TenerMedPreparado.IdMedicamento IS 'Identificador del medicamento preparado.';
+COMMENT ON COLUMN TenerMedPreparado.CantidadComprada IS 'Cantidad de unidades adquiridas.';
+COMMENT ON COLUMN TenerMedPreparado.PrecioUnitario IS 'Precio unitario de la preparación.';
+
+-- Comentarios de Restricciones
+COMMENT ON CONSTRAINT TenerMedPreparado_fk1 ON TenerMedPreparado IS 'Llave foránea: Ticket al que pertenece el detalle.';
+COMMENT ON CONSTRAINT TenerMedPreparado_fk2 ON TenerMedPreparado IS 'Llave foránea: Medicamento preparado vendido.';
+COMMENT ON CONSTRAINT TenerMedPreparado_d1 ON TenerMedPreparado IS 'Validación: La cantidad comprada debe ser mayor a cero.';
+COMMENT ON CONSTRAINT TenerMedPreparado_d2 ON TenerMedPreparado IS 'Validación: El precio unitario no puede ser negativo.';
+
+-- =================================================================
+--                             MÓDULO 4 
+-- =================================================================
+
+-- Tabla 1
+CREATE TABLE CobrarConsulta(
+    IdConsulta SERIAL,
+    Fecha DATE,
+    Hora TIME,
+    Diagnostico TEXT,
+    Precio NUMERIC(6,2),
+    IdCliente INTEGER,
+    RFCMedico VARCHAR(13),
+    RFCEnfermero VARCHAR(13),
+    FolioTicket INTEGER
+);
+
+-- PK
+ALTER TABLE CobrarConsulta ADD CONSTRAINT CobrarConsulta_pk
+PRIMARY KEY (IdConsulta);
+
+-- FK
+ALTER TABLE CobrarConsulta ADD CONSTRAINT CobrarConsulta_fk1
+FOREIGN KEY (IdCliente) REFERENCES Cliente(IdCliente)
+ON UPDATE CASCADE ON DELETE RESTRICT;
+
+ALTER TABLE CobrarConsulta ADD CONSTRAINT CobrarConsulta_fk2
+FOREIGN KEY (RFCMedico) REFERENCES Medico(RFC)
+ON UPDATE CASCADE ON DELETE RESTRICT;
+
+ALTER TABLE CobrarConsulta ADD CONSTRAINT CobrarConsulta_fk3
+FOREIGN KEY (RFCEnfermero) REFERENCES Enfermero(RFC)
+ON UPDATE CASCADE ON DELETE RESTRICT;
+
+ALTER TABLE CobrarConsulta ADD CONSTRAINT CobrarConsulta_fk4
+FOREIGN KEY (FolioTicket) REFERENCES Ticket(FolioTicket)
+ON UPDATE CASCADE ON DELETE RESTRICT;
+
+-- Restricciones
+ALTER TABLE CobrarConsulta
+ALTER COLUMN Fecha SET NOT NULL,
+ALTER COLUMN Hora SET NOT NULL,
+ALTER COLUMN RFCMedico SET NOT NULL,
+ALTER COLUMN Precio SET NOT NULL,
+ALTER COLUMN Diagnostico SET NOT NULL,
+ADD CONSTRAINT CobrarConsulta_d1 CHECK (Precio >= 0),
+ALTER COLUMN FolioTicket SET NOT NULL,
+ADD CONSTRAINT CobrarConsulta_u2 UNIQUE (FolioTicket),
+ALTER COLUMN IdCliente SET NOT NULL;   -- Corrección: Cliente obligatorio
+
+-- =================================================================
+--                      BLOQUE DE COMENTARIOS 
+-- =================================================================
+COMMENT ON TABLE CobrarConsulta IS 'Registro de consultas médicas realizadas en las clínicas.';
+
+-- Comentarios de Columnas 
+COMMENT ON COLUMN CobrarConsulta.IdConsulta IS 'Identificador único de la consulta médica.';
+COMMENT ON COLUMN CobrarConsulta.Fecha IS 'Fecha en la que se realiza la consulta.';
+COMMENT ON COLUMN CobrarConsulta.Hora IS 'Hora programada o de inicio de la consulta.';
+COMMENT ON COLUMN CobrarConsulta.Diagnostico IS 'Descripción clínica detallada de los hallazgos en la consulta.';
+COMMENT ON COLUMN CobrarConsulta.Precio IS 'Costo total de los servicios médicos prestados en la consulta.';
+COMMENT ON COLUMN CobrarConsulta.IdCliente IS 'Identificador del paciente; es obligatorio para registrar la atención.';
+COMMENT ON COLUMN CobrarConsulta.RFCMedico IS 'RFC del médico responsable de atender la consulta.';
+COMMENT ON COLUMN CobrarConsulta.RFCEnfermero IS 'RFC del enfermero de apoyo; es opcional (permite NULL).';
+COMMENT ON COLUMN CobrarConsulta.FolioTicket IS 'Folio del ticket de pago vinculado a la transacción de la consulta.';
+
+-- Comentarios de Restricciones
+COMMENT ON CONSTRAINT CobrarConsulta_pk ON CobrarConsulta IS 'Llave primaria: Identificador único de la consulta.';
+COMMENT ON CONSTRAINT CobrarConsulta_fk1 ON CobrarConsulta IS 'Llave foránea: Cliente que recibe la consulta.';
+COMMENT ON CONSTRAINT CobrarConsulta_fk2 ON CobrarConsulta IS 'Llave foránea: Médico que atiende la consulta.';
+COMMENT ON CONSTRAINT CobrarConsulta_fk3 ON CobrarConsulta IS 'Llave foránea: Enfermero de apoyo en la consulta.';
+COMMENT ON CONSTRAINT CobrarConsulta_fk4 ON CobrarConsulta IS 'Llave foránea: Ticket de pago vinculado a la consulta.';
+COMMENT ON CONSTRAINT CobrarConsulta_d1 ON CobrarConsulta IS 'Validación: El precio de la consulta no puede ser negativo.';
+COMMENT ON CONSTRAINT CobrarConsulta_u2 ON CobrarConsulta IS 'Restricción: Unicidad del ticket por consulta (1:1).';
+
+
+-- Tabla 2
+CREATE TABLE Receta(
+    IdConsulta INTEGER,
+    NumeroReceta INTEGER,
+    PesoPaciente NUMERIC(5,2),
+    TallaPaciente NUMERIC(5,2),
+    Consultorio INTEGER,
+    Turno VARCHAR(50)
+);
+
+-- PK
+ALTER TABLE Receta ADD CONSTRAINT Receta_pk
+PRIMARY KEY (IdConsulta, NumeroReceta);
+
+-- FK
+ALTER TABLE Receta ADD CONSTRAINT Receta_fk
+FOREIGN KEY (IdConsulta) REFERENCES CobrarConsulta(IdConsulta)
+ON UPDATE CASCADE ON DELETE CASCADE;
+
+-- Restricciones
+ALTER TABLE Receta
+ALTER COLUMN PesoPaciente SET NOT NULL,
+ADD CONSTRAINT Receta_d1 CHECK (PesoPaciente > 0),
+ALTER COLUMN TallaPaciente SET NOT NULL,
+ADD CONSTRAINT Receta_d2 CHECK (TallaPaciente > 0),
+ALTER COLUMN Consultorio SET NOT NULL,
+ADD CONSTRAINT Receta_d3 CHECK (Consultorio > 0),
+ALTER COLUMN Turno SET NOT NULL,
+ADD CONSTRAINT Receta_d4 CHECK (Turno IN ('Matutino', 'Vespertino'));
+
+-- =================================================================
+--                      BLOQUE DE COMENTARIOS 
+-- =================================================================
+COMMENT ON TABLE Receta IS 'Documento médico generado en una consulta con indicaciones de tratamiento.';
+
+-- Comentarios de Columnas
+COMMENT ON COLUMN Receta.IdConsulta IS 'Identificador de la consulta médica vinculada.';
+COMMENT ON COLUMN Receta.NumeroReceta IS 'Número secuencial de la receta dentro de la consulta.';
+COMMENT ON COLUMN Receta.PesoPaciente IS 'Peso del paciente registrado al momento de la consulta (kg).';
+COMMENT ON COLUMN Receta.TallaPaciente IS 'Estatura o talla del paciente (cm).';
+COMMENT ON COLUMN Receta.Consultorio IS 'Número de consultorio físico donde se atendió.';
+COMMENT ON COLUMN Receta.Turno IS 'Turno de atención (Matutino o Vespertino).';
+
+-- Comentarios de Restricciones
+COMMENT ON CONSTRAINT Receta_pk ON Receta IS 'Llave primaria compuesta (IdConsulta y NumeroReceta).';
+COMMENT ON CONSTRAINT Receta_fk ON Receta IS 'Llave foránea: CobrarConsulta médica que originó la receta.';
+COMMENT ON CONSTRAINT Receta_d1 ON Receta IS 'Validación: El peso del paciente debe ser positivo.';
+COMMENT ON CONSTRAINT Receta_d2 ON Receta IS 'Validación: La talla del paciente debe ser positiva.';
+COMMENT ON CONSTRAINT Receta_d3 ON Receta IS 'Validación: El número de consultorio debe ser positivo.';
+COMMENT ON CONSTRAINT Receta_d4 ON Receta IS 'Validación: Restringe el turno a Matutino o Vespertino.';
+
+
+-- Tabla 3
+CREATE TABLE Alergias_Reportadas(
+    IdConsulta INTEGER,
+    NumeroReceta INTEGER,
+    AlergiasReportadas TEXT
+);
+
+-- PK
+ALTER TABLE Alergias_Reportadas ADD CONSTRAINT Alergias_Reportadas_pk
+PRIMARY KEY (IdConsulta, NumeroReceta, AlergiasReportadas);
+
+-- FK
+ALTER TABLE Alergias_Reportadas ADD CONSTRAINT Alergias_Reportadas_fk
+FOREIGN KEY (IdConsulta, NumeroReceta) REFERENCES Receta(IdConsulta, NumeroReceta)
+ON UPDATE CASCADE ON DELETE CASCADE;
+
+-- Restricciones
+ALTER TABLE Alergias_Reportadas
+ALTER COLUMN AlergiasReportadas SET DEFAULT 'Ninguna conocida';
+
+-- =================================================================
+--                      BLOQUE DE COMENTARIOS 
+-- =================================================================
+COMMENT ON TABLE Alergias_Reportadas IS 'Atributo multivaluado que registra las alergias del paciente en una receta.';
+
+-- Comentarios de Columnas
+COMMENT ON COLUMN Alergias_Reportadas.IdConsulta IS 'Identificador de la consulta vinculada.';
+COMMENT ON COLUMN Alergias_Reportadas.NumeroReceta IS 'Número de receta vinculado.';
+COMMENT ON COLUMN Alergias_Reportadas.AlergiasReportadas IS 'Descripción de la alergia reportada por el paciente.';
+
+-- Comentarios de Restricciones
+COMMENT ON CONSTRAINT Alergias_Reportadas_pk ON Alergias_Reportadas IS 'Llave primaria compuesta (IdConsulta, NumeroReceta y AlergiasReportadas).';
+COMMENT ON CONSTRAINT Alergias_Reportadas_fk ON Alergias_Reportadas IS 'Llave foránea (compuesta): Receta a la que pertenece el reporte de alergias.';
+
+
+-- Tabla 4 (nombre corregido: PrescribirMedComercial)
+CREATE TABLE PrescribirMedComercial(
+    IdConsulta INTEGER,
+    NumeroReceta INTEGER,
+    IdMedicamento INTEGER,
+    DosisPrescrita VARCHAR(50),
+    Frecuencia VARCHAR(50),
+    ViaAdministracionIndicada VARCHAR(50),
+    Duracion VARCHAR(50)
+);
+
+-- NOTA: No se define PK porque fue eliminada en corrección (PrescribirMedComercial_pk)
+
+-- FK
+ALTER TABLE PrescribirMedComercial ADD CONSTRAINT PrescribirMedComercial_fk1
+FOREIGN KEY (IdConsulta, NumeroReceta) REFERENCES Receta(IdConsulta, NumeroReceta)
+ON UPDATE CASCADE ON DELETE CASCADE;
+
+ALTER TABLE PrescribirMedComercial ADD CONSTRAINT PrescribirMedComercial_fk2
+FOREIGN KEY (IdMedicamento) REFERENCES MedComercial(IdMedicamento)
+ON UPDATE CASCADE ON DELETE RESTRICT;
+
+-- Restricciones
+ALTER TABLE PrescribirMedComercial
+ALTER COLUMN DosisPrescrita SET NOT NULL,
+ALTER COLUMN Frecuencia SET NOT NULL,
+ALTER COLUMN Duracion SET NOT NULL,
+ALTER COLUMN ViaAdministracionIndicada SET NOT NULL;
+
+-- =================================================================
+--                      BLOQUE DE COMENTARIOS 
+-- =================================================================
+COMMENT ON TABLE PrescribirMedComercial IS 'Detalle de medicamentos comerciales recetados.';
+
+-- Comentarios de Columnas
+COMMENT ON COLUMN PrescribirMedComercial.IdConsulta IS 'Identificador de la consulta vinculada.';
+COMMENT ON COLUMN PrescribirMedComercial.NumeroReceta IS 'Número de receta vinculado.';
+COMMENT ON COLUMN PrescribirMedComercial.IdMedicamento IS 'Identificador del medicamento comercial recetado.';
+COMMENT ON COLUMN PrescribirMedComercial.DosisPrescrita IS 'Cantidad y unidad del medicamento a administrar.';
+COMMENT ON COLUMN PrescribirMedComercial.Frecuencia IS 'Intervalo de tiempo entre dosis.';
+COMMENT ON COLUMN PrescribirMedComercial.ViaAdministracionIndicada IS 'Vía de administración especificada por el médico.';
+COMMENT ON COLUMN PrescribirMedComercial.Duracion IS 'Periodo total del tratamiento.';
+
+-- Comentarios de Restricciones
+COMMENT ON CONSTRAINT PrescribirMedComercial_fk1 ON PrescribirMedComercial IS 'Llave foránea (compuesta): Receta que incluye la prescripción.';
+COMMENT ON CONSTRAINT PrescribirMedComercial_fk2 ON PrescribirMedComercial IS 'Llave foránea: Medicamento comercial recetado.';
+
+
+-- Tabla 5 (nombre corregido: PrescribirMedPreparado)
+CREATE TABLE PrescribirMedPreparado(
+    IdConsulta INTEGER,
+    NumeroReceta INTEGER,
+    IdMedicamento INTEGER,
+    DosisPrescrita VARCHAR(50),
+    Frecuencia VARCHAR(50),
+    ViaAdministracionIndicada VARCHAR(50),
+    Duracion VARCHAR(50)
+);
+
+-- NOTA: No se define PK porque fue eliminada en corrección (PrescribirMedPreparado_pk)
+
+-- FK
+ALTER TABLE PrescribirMedPreparado ADD CONSTRAINT PrescribirMedPreparado_fk1
+FOREIGN KEY (IdConsulta, NumeroReceta) REFERENCES Receta(IdConsulta, NumeroReceta)
+ON UPDATE CASCADE ON DELETE CASCADE;
+
+-- FK corregida: apunta a MedPreparado, no a MedComercial
+ALTER TABLE PrescribirMedPreparado ADD CONSTRAINT PrescribirMedPreparado_fk2
+FOREIGN KEY (IdMedicamento) REFERENCES MedPreparado(IdMedicamento)
+ON UPDATE CASCADE ON DELETE RESTRICT;
+
+-- Restricciones
+ALTER TABLE PrescribirMedPreparado
+ALTER COLUMN DosisPrescrita SET NOT NULL,
+ALTER COLUMN Frecuencia SET NOT NULL,
+ALTER COLUMN Duracion SET NOT NULL,
+ALTER COLUMN ViaAdministracionIndicada SET NOT NULL;
+
+-- =================================================================
+--                      BLOQUE DE COMENTARIOS 
+-- =================================================================
+COMMENT ON TABLE PrescribirMedPreparado IS 'Detalle de medicamentos preparados recetados.';
+
+-- Comentarios de Columnas
+COMMENT ON COLUMN PrescribirMedPreparado.IdConsulta IS 'Identificador de la consulta vinculada.';
+COMMENT ON COLUMN PrescribirMedPreparado.NumeroReceta IS 'Número de receta vinculado.';
+COMMENT ON COLUMN PrescribirMedPreparado.IdMedicamento IS 'Identificador de la fórmula magistral recetada.';
+COMMENT ON COLUMN PrescribirMedPreparado.DosisPrescrita IS 'Instrucciones de dosificación para el preparado.';
+COMMENT ON COLUMN PrescribirMedPreparado.Frecuencia IS 'Periodicidad de la administración.';
+COMMENT ON COLUMN PrescribirMedPreparado.ViaAdministracionIndicada IS 'Vía de administración recomendada por el especialista.';
+COMMENT ON COLUMN PrescribirMedPreparado.Duracion IS 'Duración total del tratamiento con el preparado.';
+
+-- Comentarios de Restricciones
+COMMENT ON CONSTRAINT PrescribirMedPreparado_fk1 ON PrescribirMedPreparado IS 'Llave foránea (compuesta): Receta que incluye la prescripción.';
+COMMENT ON CONSTRAINT PrescribirMedPreparado_fk2 ON PrescribirMedPreparado IS 'Llave foránea: Medicamento preparado recetado.';
