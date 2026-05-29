@@ -1746,10 +1746,18 @@ ADD CONSTRAINT Ticket_d1 CHECK (TipoVenta IN ('Presencial', 'Web')),
 ALTER COLUMN IdCliente SET NOT NULL,
 ALTER COLUMN IdSucursal SET NOT NULL,
 
--- RESTRICCIONES DE HERENCIA
+-- RESTRICCIONES DE HERENCIA Y LÓGICA DE NEGOCIO
 ALTER COLUMN EsTicketConsulta SET NOT NULL,
 ALTER COLUMN EsTicketMedicamento SET NOT NULL,
-ADD CONSTRAINT Ticket_chk_completitud CHECK (EsTicketConsulta = TRUE OR EsTicketMedicamento = TRUE);
+-- 1. Regla de completitud: No pueden existir tickets vacíos
+ADD CONSTRAINT Ticket_chk_completitud CHECK (EsTicketConsulta = TRUE OR EsTicketMedicamento = TRUE),
+-- 2. Regla de ventas online: Internet no admite consultas, sólo medicamentos
+ADD CONSTRAINT Ticket_chk_reglas_web 
+CHECK (
+    (TipoVenta = 'Presencial') 
+    OR 
+    (TipoVenta = 'Web' AND EsTicketConsulta = FALSE AND EsTicketMedicamento = TRUE)
+);
 
 -- =================================================================
 --                      BLOQUE DE COMENTARIOS 
@@ -1772,6 +1780,7 @@ COMMENT ON CONSTRAINT Ticket_fk1 ON Ticket IS 'Llave foránea: Sucursal donde se
 COMMENT ON CONSTRAINT Ticket_fk2 ON Ticket IS 'Llave foránea: Cliente que realizó la compra.';
 COMMENT ON CONSTRAINT Ticket_d1 ON Ticket IS 'Validación: Restringe el tipo de venta a Presencial o Web.';
 COMMENT ON CONSTRAINT Ticket_chk_completitud ON Ticket IS 'Integridad de completitud total: Un ticket no puede guardarse si ambas banderas son falsas.';
+COMMENT ON CONSTRAINT Ticket_chk_reglas_web ON Ticket IS 'Validación: Las ventas web no pueden incluir consultas médicas, sólo medicamentos.';
 
 
 -- Tabla 4
