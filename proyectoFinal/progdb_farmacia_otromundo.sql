@@ -1,6 +1,6 @@
 -- ======================================================================================
 -- PROYECTO FINAL: "Una farmacia de otro mundo" - Equipo Hotline
--- SCRIPT DE PROCEDIMIENTOS ALMACENADOS Y DISPARADORES 
+-- SCRIPT DE DISPARADORES, PROCEDIMIENTOS ALMACENADOS Y FUNCIONES 
 -- ======================================================================================
 
 -- ======================================================================================
